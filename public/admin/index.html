@@ -3,53 +3,80 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>CROSHARA – Admin</title>
+  <title>CROSHARA – Admin Dashboard</title>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <style>
     *{margin:0;padding:0;box-sizing:border-box}
-    :root{--cream:#FDF6F0;--pink:#E8A0B4;--navy:#1a1a2e;--white:#fff;--text:#2d2d3a;--text-light:#6b6b80;--shadow:0 4px 24px rgba(26,26,46,0.06);--radius:16px;--radius-sm:10px}
+    :root{--cream:#FDF6F0;--cream-dark:#F5EBE0;--pink:#E8A0B4;--pink-dark:#D4809A;--navy:#1a1a2e;--navy-light:#2d2d4a;--white:#fff;--text:#2d2d3a;--text-light:#6b6b80;--shadow:0 4px 24px rgba(26,26,46,0.06);--shadow-hover:0 8px 40px rgba(26,26,46,0.12);--radius:16px;--radius-sm:10px}
     body{font-family:'Inter',sans-serif;background:#f8f4f0;color:var(--text)}
     .app{display:flex;min-height:100vh}
-    .sidebar{width:240px;background:var(--navy);color:var(--white);padding:24px;display:flex;flex-direction:column;position:fixed;top:0;left:0;height:100vh;z-index:100}
-    .sidebar .logo{font-family:'Playfair Display',serif;font-size:1.4rem;font-weight:700;margin-bottom:8px}
+
+    .sidebar{width:260px;background:var(--navy);color:var(--white);padding:28px 20px;display:flex;flex-direction:column;position:fixed;top:0;left:0;height:100vh;z-index:100}
+    .sidebar .logo{font-family:'Playfair Display',serif;font-size:1.5rem;font-weight:700;margin-bottom:4px}
     .sidebar .logo span{color:var(--pink)}
-    .sidebar .logo small{font-size:0.7rem;opacity:0.5;display:block}
-    .sidebar nav{display:flex;flex-direction:column;gap:4px;flex:1;margin-top:24px}
-    .sidebar nav a{color:rgba(255,255,255,0.6);text-decoration:none;padding:10px 16px;border-radius:var(--radius-sm);transition:all 0.3s;font-size:0.9rem;display:flex;align-items:center;gap:10px}
+    .sidebar .logo small{font-size:0.7rem;opacity:0.5;display:block;font-family:'Inter',sans-serif;font-weight:400}
+    .sidebar nav{display:flex;flex-direction:column;gap:2px;flex:1;margin-top:32px}
+    .sidebar nav a{color:rgba(255,255,255,0.5);text-decoration:none;padding:12px 16px;border-radius:var(--radius-sm);transition:all 0.3s;font-size:0.9rem;display:flex;align-items:center;gap:12px;font-weight:500}
     .sidebar nav a:hover,.sidebar nav a.active{background:rgba(255,255,255,0.08);color:var(--white)}
-    .sidebar-bottom{border-top:1px solid rgba(255,255,255,0.08);padding-top:16px}
-    .sidebar-bottom a{color:rgba(255,255,255,0.4);text-decoration:none;font-size:0.85rem;display:flex;align-items:center;gap:8px;padding:8px 0;transition:all 0.3s}
+    .sidebar nav a.active{background:rgba(232,160,180,0.12);color:var(--pink)}
+    .sidebar-divider{height:1px;background:rgba(255,255,255,0.06);margin:12px 0}
+    .sidebar-bottom a{color:rgba(255,255,255,0.35);text-decoration:none;font-size:0.85rem;display:flex;align-items:center;gap:8px;padding:8px 0;transition:all 0.3s}
     .sidebar-bottom a:hover{color:var(--white)}
-    .main{flex:1;margin-left:240px;padding:32px}
+
+    .main{flex:1;margin-left:260px;padding:36px}
     .header{display:flex;justify-content:space-between;align-items:center;margin-bottom:32px;flex-wrap:wrap;gap:16px}
-    .header h1{font-family:'Playfair Display',serif;font-size:1.6rem;color:var(--navy)}
-    .header .date{color:var(--text-light);font-size:0.85rem}
-    .status-badge{display:flex;align-items:center;gap:6px;padding:6px 14px;border-radius:50px;font-size:0.85rem;background:rgba(34,197,94,0.1);color:#22c55e}
-    .status-badge .dot{width:8px;height:8px;border-radius:50%;background:#22c55e;animation:pulse 2s infinite}
+    .header h1{font-family:'Playfair Display',serif;font-size:1.8rem;color:var(--navy)}
+    .header-right{display:flex;align-items:center;gap:12px}
+    .live-badge{display:flex;align-items:center;gap:6px;padding:6px 16px;border-radius:50px;font-size:0.85rem;font-weight:500;background:rgba(34,197,94,0.1);color:#22c55e}
+    .live-badge .dot{width:8px;height:8px;border-radius:50%;background:#22c55e;animation:pulse 2s infinite}
     @keyframes pulse{0%,100%{opacity:1}50%{opacity:0.3}}
-    .card{background:var(--white);border-radius:var(--radius);padding:24px;box-shadow:var(--shadow);margin-bottom:20px}
-    .card-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;flex-wrap:wrap;gap:8px}
-    .card-header h3{font-size:1rem;color:var(--navy)}
-    .card-header .count{font-size:0.85rem;color:var(--text-light)}
+
+    .stats-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:20px;margin-bottom:28px}
+    .stat-card{background:var(--white);border-radius:var(--radius);padding:28px;box-shadow:var(--shadow);border:1px solid rgba(0,0,0,0.03);transition:all 0.3s}
+    .stat-card:hover{box-shadow:var(--shadow-hover);transform:translateY(-2px)}
+    .stat-card .stat-icon{font-size:2rem;margin-bottom:12px}
+    .stat-card .stat-label{font-size:0.85rem;color:var(--text-light);text-transform:uppercase;letter-spacing:0.5px;font-weight:500;margin-bottom:6px}
+    .stat-card .stat-value{font-size:2.2rem;font-weight:700;color:var(--navy)}
+    .stat-card .stat-sub{font-size:0.8rem;color:var(--text-light);margin-top:4px}
+
+    .card{background:var(--white);border-radius:var(--radius);padding:28px;box-shadow:var(--shadow);margin-bottom:20px;border:1px solid rgba(0,0,0,0.03)}
+    .card-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;flex-wrap:wrap;gap:8px;padding-bottom:16px;border-bottom:2px solid var(--cream)}
+    .card-header h3{font-size:1.05rem;color:var(--navy);display:flex;align-items:center;gap:8px}
+    .card-header .badge{background:var(--cream);padding:4px 12px;border-radius:50px;font-size:0.8rem;color:var(--text-light);font-weight:500}
+
     table{width:100%;border-collapse:collapse}
-    th{text-align:left;padding:10px 14px;font-size:0.75rem;text-transform:uppercase;letter-spacing:0.5px;color:var(--text-light);font-weight:500;border-bottom:2px solid var(--cream)}
-    td{padding:10px 14px;font-size:0.85rem;border-bottom:1px solid rgba(0,0,0,0.04)}
+    th{text-align:left;padding:12px 14px;font-size:0.75rem;text-transform:uppercase;letter-spacing:0.5px;color:var(--text-light);font-weight:600;background:var(--cream);border-bottom:2px solid var(--cream-dark)}
+    th:first-child{border-radius:8px 0 0 0}
+    th:last-child{border-radius:0 8px 0 0}
+    td{padding:14px;font-size:0.88rem;border-bottom:1px solid rgba(0,0,0,0.04);color:var(--text)}
+    tr:last-child td:first-child{border-radius:0 0 0 8px}
+    tr:last-child td:last-child{border-radius:0 0 8px 0}
     tr:hover td{background:rgba(232,160,180,0.04)}
-    .empty-state{text-align:center;padding:40px;color:var(--text-light)}
-    .empty-state .icon{font-size:2.5rem;margin-bottom:8px;opacity:0.3}
-    .stat-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;margin-bottom:20px}
-    .stat-card{background:var(--cream);border-radius:var(--radius-sm);padding:20px}
-    .stat-card .label{font-size:0.8rem;color:var(--text-light);margin-bottom:4px}
-    .stat-card .value{font-size:1.8rem;font-weight:700;color:var(--navy)}
-    @media(max-width:768px){.sidebar{display:none}.main{margin-left:0}.stat-grid{grid-template-columns:1fr}}
+    .text-muted{color:var(--text-light)}
+
+    .empty-state{text-align:center;padding:60px 20px}
+    .empty-state .icon{font-size:3rem;margin-bottom:12px;opacity:0.25}
+    .empty-state h3{font-size:1.1rem;color:var(--text);margin-bottom:4px}
+    .empty-state p{color:var(--text-light);font-size:0.9rem}
+
+    .subscriber-item{display:flex;align-items:center;gap:14px;padding:12px 0;border-bottom:1px solid rgba(0,0,0,0.04)}
+    .subscriber-item:last-child{border-bottom:none}
+    .subscriber-email{font-weight:500;color:var(--navy)}
+    .subscriber-date{font-size:0.8rem;color:var(--text-light);margin-left:auto}
+
+    @media(max-width:768px){.sidebar{display:none}.main{margin-left:0;padding:20px}.stats-grid{grid-template-columns:1fr}}
   </style>
 </head>
 <body>
 <div class="app">
   <aside class="sidebar">
-    <div class="logo">CROSHARA<span>.</span> <small>Admin</small></div>
+    <div class="logo">CROSHARA<span>.</span> <small>Admin Dashboard</small></div>
     <nav>
-      <a href="#" class="active">📊 Dashboard</a>
+      <a href="#" class="active">📊 Overview</a>
+      <a href="/" target="_blank">🏪 View Store</a>
+      <div class="sidebar-divider"></div>
+      <a href="https://www.instagram.com/crosharahandmade" target="_blank" style="opacity:0.6;font-size:0.85rem">📷 Instagram</a>
+      <a href="mailto:croshara.in@gmail.com" style="opacity:0.6;font-size:0.85rem">✉️ Email</a>
     </nav>
     <div class="sidebar-bottom">
       <a href="/">← Back to Store</a>
@@ -60,72 +87,100 @@
     <div class="header">
       <div>
         <h1>Dashboard</h1>
-        <div class="date" id="currentDate"></div>
+        <div style="color:var(--text-light);font-size:0.85rem;margin-top:4px" id="currentDate"></div>
       </div>
-      <div class="status-badge"><span class="dot"></span> Live</div>
+      <div class="header-right">
+        <div class="live-badge"><span class="dot"></span> Live</div>
+      </div>
     </div>
 
-    <!-- Stats -->
-    <div class="stat-grid" id="statsGrid">
-      <div class="stat-card"><div class="label">📧 Newsletter Subscribers</div><div class="value" id="statSubs">0</div></div>
-      <div class="stat-card"><div class="label">👥 Contact Inquiries</div><div class="value" id="statContacts">0</div></div>
+    <div class="stats-grid">
+      <div class="stat-card">
+        <div class="stat-icon">📧</div>
+        <div class="stat-label">Newsletter Subscribers</div>
+        <div class="stat-value" id="statSubs">0</div>
+        <div class="stat-sub">People who joined your mailing list</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon">💬</div>
+        <div class="stat-label">Contact Inquiries</div>
+        <div class="stat-value" id="statContacts">0</div>
+        <div class="stat-sub">Messages from your website visitors</div>
+      </div>
     </div>
 
-    <!-- Contacts -->
     <div class="card">
-      <div class="card-header"><h3>👥 Contact Inquiries</h3><span class="count" id="contactsCount">0</span></div>
-      <div id="contactsList"><div class="empty-state"><div class="icon">👥</div><h3>No inquiries yet</h3><p>They'll appear here when people contact you</p></div></div>
+      <div class="card-header">
+        <h3>💬 Contact Inquiries</h3>
+        <span class="badge" id="contactsCount">0 total</span>
+      </div>
+      <div id="contactsList">
+        <div class="empty-state">
+          <div class="icon">💬</div>
+          <h3>No inquiries yet</h3>
+          <p>When someone contacts you through the website, they'll appear here</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header">
+        <h3>📧 Recent Subscribers</h3>
+        <span class="badge" id="subsCount">0 total</span>
+      </div>
+      <div id="subsList">
+        <div class="empty-state">
+          <div class="icon">📧</div>
+          <h3>No subscribers yet</h3>
+          <p>Newsletter signups will appear here</p>
+        </div>
+      </div>
     </div>
   </main>
 </div>
 
 <script>
-const API = window.location.origin;
-
-document.addEventListener("DOMContentLoaded", () => {
+(async function() {
   document.getElementById("currentDate").textContent = new Date().toLocaleDateString("en-IN", { weekday: "long", year: "numeric", month: "long", day: "numeric" });
-  loadData();
-  setInterval(loadData, 30000);
-});
 
-async function loadData() {
-  try {
-    const [cRes, nRes] = await Promise.all([
-      fetch(`${API}/api/contacts`).then(r => r.json()),
-      fetch(`${API}/api/newsletter/count`).then(r => r.json()),
-    ]);
-    const contacts = cRes.contacts || [];
-    const subs = nRes.count || 0;
+  async function load() {
+    try {
+      const [cRes, nRes] = await Promise.all([
+        fetch("/api/contacts").then(r => r.json()),
+        fetch("/api/newsletter/count").then(r => r.json()),
+      ]);
 
-    document.getElementById("statSubs").textContent = subs;
-    document.getElementById("statContacts").textContent = contacts.length;
-    document.getElementById("contactsCount").textContent = contacts.length;
+      const contacts = cRes.contacts || [];
+      const subCount = nRes.count || 0;
 
-    const container = document.getElementById("contactsList");
-    if (!contacts.length) {
-      container.innerHTML = '<div class="empty-state"><div class="icon">👥</div><h3>No inquiries yet</h3><p>They\'ll appear here when people contact you</p></div>';
-      return;
-    }
+      document.getElementById("statSubs").textContent = subCount;
+      document.getElementById("statContacts").textContent = contacts.length;
+      document.getElementById("contactsCount").textContent = `${contacts.length} total`;
+      document.getElementById("subsCount").textContent = `${subCount} total`;
 
-    container.innerHTML = `
-      <table>
-        <thead><tr><th>Name</th><th>Email</th><th>Phone</th><th>Message</th><th>Date</th></tr></thead>
-        <tbody>
-          ${contacts.slice().reverse().map(c => `
-            <tr>
-              <td><strong>${c.name || "—"}</strong></td>
-              <td>${c.email || "—"}</td>
-              <td>${c.phone || "—"}</td>
-              <td>${(c.message || "").slice(0, 60)}${(c.message || "").length > 60 ? "..." : ""}</td>
-              <td>${new Date(c.createdAt).toLocaleDateString("en-IN")}</td>
-            </tr>
-          `).join("")}
-        </tbody>
-      </table>`;
-  } catch (e) {
-    console.warn("Data load error");
+      const cl = document.getElementById("contactsList");
+      if (contacts.length) {
+        cl.innerHTML = `<table>
+          <thead><tr><th>Name</th><th>Email</th><th>Phone</th><th>Message</th><th>Date</th></tr></thead>
+          <tbody>${contacts.slice().reverse().map(c => `<tr>
+            <td><strong>${c.name || "—"}</strong></td>
+            <td>${c.email || "—"}</td>
+            <td>${c.phone || "—"}</td>
+            <td style="max-width:200px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${c.message || "—"}</td>
+            <td class="text-muted">${new Date(c.createdAt).toLocaleDateString("en-IN")}</td>
+          </tr>`).join("")}</tbody></table>`;
+      }
+
+      const sl = document.getElementById("subsList");
+      if (subCount > 0) {
+        sl.innerHTML = `<div style="padding:8px 0"><p style="color:var(--text-light)">📊 ${subCount} people have subscribed to your newsletter</p></div>`;
+      }
+    } catch(e) {}
   }
-}
+
+  load();
+  setInterval(load, 30000);
+})();
 </script>
 </body>
 </html>
