@@ -11,6 +11,25 @@ app.use(cors());
 app.use(express.json());
 app.use(express.static(path.join(__dirname, "public")));
 
+const ADMIN_USER = "admin";
+const ADMIN_PASS = "croshara123";
+
+app.use((req, res, next) => {
+  if (!req.path.startsWith("/admin")) return next();
+  const auth = req.headers.authorization;
+  if (!auth || !auth.startsWith("Basic ")) {
+    res.set("WWW-Authenticate", 'Basic realm="CROSHARA Admin"');
+    return res.status(401).send("Authentication required");
+  }
+  const decoded = Buffer.from(auth.slice(6), "base64").toString();
+  const [user, pass] = decoded.split(":");
+  if (user !== ADMIN_USER || pass !== ADMIN_PASS) {
+    res.set("WWW-Authenticate", 'Basic realm="CROSHARA Admin"');
+    return res.status(401).send("Invalid credentials");
+  }
+  next();
+});
+
 app.get("/api/health", (req, res) => {
   res.json({ status: "live", brand: "CROSHARA", time: new Date().toISOString() });
 });
