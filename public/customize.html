@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CROSHARA – Customize Your Booties</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/style.css">
+  <style>
+    .customizer { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; min-height: 80vh; align-items: center; }
+    .customizer-preview { position: relative; display: flex; flex-direction: column; align-items: center; }
+    .customizer-title { font-family: 'Playfair Display', serif; font-size: 2.4rem; color: var(--navy); margin-bottom: 8px; }
+    .customizer-sub { color: var(--text-light); margin-bottom: 32px; }
+    .bootie-scene { position: relative; width: 100%; max-width: 400px; }
+    .bootie-scene svg { width: 100%; height: auto; filter: drop-shadow(0 20px 40px rgba(26,26,46,0.15)); }
+    .view-toggle { display: flex; gap: 8px; margin-top: 24px; }
+    .view-btn { padding: 8px 20px; border-radius: 50px; border: 1px solid rgba(0,0,0,0.1); background: var(--white); cursor: pointer; transition: var(--transition); font-size: 0.85rem; font-weight: 500; }
+    .view-btn.active { background: var(--navy); color: var(--white); border-color: var(--navy); }
+    .view-btn:hover:not(.active) { border-color: var(--pink); color: var(--pink); }
+
+    .customizer-controls { padding: 40px; background: var(--white); border-radius: var(--radius); box-shadow: var(--shadow); }
+    .color-section { margin-bottom: 28px; }
+    .color-section h4 { font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1px; color: var(--text-light); margin-bottom: 12px; }
+    .swatch-grid { display: flex; flex-wrap: wrap; gap: 10px; }
+    .swatch-btn { width: 40px; height: 40px; border-radius: 50%; border: 3px solid transparent; cursor: pointer; transition: var(--transition); position: relative; }
+    .swatch-btn:hover { transform: scale(1.15); }
+    .swatch-btn.active { border-color: var(--navy); box-shadow: 0 0 0 3px var(--white), 0 0 0 5px var(--navy); }
+    .swatch-btn .tooltip { position: absolute; bottom: -28px; left: 50%; transform: translateX(-50%); font-size: 0.7rem; color: var(--text-light); white-space: nowrap; opacity: 0; transition: var(--transition); pointer-events: none; }
+    .swatch-btn:hover .tooltip { opacity: 1; }
+
+    .size-section { margin-bottom: 28px; }
+    .size-section h4 { font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1px; color: var(--text-light); margin-bottom: 12px; }
+    .size-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+    .size-btn { padding: 12px; border-radius: var(--radius-sm); border: 2px solid rgba(0,0,0,0.08); background: var(--cream); cursor: pointer; transition: var(--transition); text-align: center; font-weight: 500; font-size: 0.85rem; }
+    .size-btn:hover { border-color: var(--pink); }
+    .size-btn.active { border-color: var(--pink); background: rgba(232,160,180,0.1); color: var(--pink-dark); }
+    .size-btn small { display: block; font-weight: 400; font-size: 0.75rem; color: var(--text-light); margin-top: 2px; }
+
+    .customizer-actions { display: flex; flex-direction: column; gap: 12px; margin-top: 32px; }
+    .customizer-actions .btn { width: 100%; justify-content: center; }
+    .customizer-actions .price-display { text-align: center; }
+    .customizer-actions .price-display .amount { font-size: 2rem; font-weight: 700; color: var(--navy); }
+    .customizer-actions .price-display .label { font-size: 0.85rem; color: var(--text-light); }
+
+    .recommender-section { margin-top: 40px; padding-top: 28px; border-top: 1px solid rgba(0,0,0,0.06); }
+    .recommender-section h4 { font-size: 1rem; margin-bottom: 16px; color: var(--navy); }
+    .recommender-form { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    .recommender-form .full { grid-column: 1 / -1; }
+    .recommender-form label { font-size: 0.8rem; font-weight: 500; color: var(--text-light); margin-bottom: 4px; display: block; }
+    .recommender-form input, .recommender-form select { width: 100%; padding: 10px 14px; border-radius: var(--radius-sm); border: 2px solid rgba(0,0,0,0.08); font-size: 0.9rem; background: var(--cream); font-family: var(--font-body); transition: var(--transition); }
+    .recommender-form input:focus, .recommender-form select:focus { outline: none; border-color: var(--pink); box-shadow: 0 0 0 4px rgba(232,160,180,0.1); }
+    .recommender-result { margin-top: 12px; padding: 16px; border-radius: var(--radius-sm); background: rgba(232,160,180,0.1); border: 1px solid rgba(232,160,180,0.2); display: none; }
+    .recommender-result.show { display: block; }
+    .recommender-result strong { color: var(--pink-dark); }
+
+    .floating-notif { position: fixed; top: 80px; right: 24px; background: var(--navy); color: var(--white); padding: 16px 24px; border-radius: var(--radius-sm); box-shadow: var(--shadow-hover); transform: translateX(120%); transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94); z-index: 3000; }
+    .floating-notif.show { transform: translateX(0); }
+
+    @media (max-width: 968px) { .customizer { grid-template-columns: 1fr; } .customizer-controls { padding: 24px; } }
+    @media (max-width: 576px) { .recommender-form { grid-template-columns: 1fr; } .size-grid { grid-template-columns: repeat(2, 1fr); } }
+  </style>
+</head>
+<body>
+
+<nav class="navbar scrolled" style="background:rgba(253,246,240,0.95);backdrop-filter:blur(20px);">
+  <div class="container">
+    <a href="/" class="logo">CROSHARA<span>.</span></a>
+    <ul class="nav-links">
+      <li><a href="/">← Back to Store</a></li>
+    </ul>
+  </div>
+</nav>
+
+<div class="floating-notif" id="notif">✅ Added to cart!</div>
+
+<section class="section">
+  <div class="container">
+    <div class="customizer">
+      <!-- LEFT: 3D Preview -->
+      <div class="customizer-preview">
+        <h1 class="customizer-title reveal">Design Your Pair</h1>
+        <p class="customizer-sub reveal reveal-delay-1">Choose colors, size, and see it come to life</p>
+        <div class="bootie-scene reveal reveal-delay-2" id="bootieScene">
+          <svg viewBox="0 0 400 450" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <filter id="shadow"><feDropShadow dx="0" dy="4" stdDeviation="8" flood-opacity="0.15"/></filter>
+              <linearGradient id="soleGrad" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stop-color="#ddd"/>
+                <stop offset="100%" stop-color="#bbb"/>
+              </linearGradient>
+            </defs>
+
+            <!-- Bottom Shadow -->
+            <ellipse cx="200" cy="430" rx="140" ry="16" fill="rgba(0,0,0,0.06)"/>
+
+            <!-- Sole -->
+            <path d="M 70 370 Q 50 380 45 400 Q 42 420 70 418 L 330 418 Q 360 418 355 400 Q 350 380 330 370 Z"
+                  fill="url(#soleGrad)" stroke="#aaa" stroke-width="1"/>
+
+            <!-- Sole Ridge -->
+            <path d="M 75 385 Q 60 395 58 405 Q 56 412 80 410 L 320 410 Q 345 410 342 405 Q 340 395 325 385 Z"
+                  fill="none" stroke="rgba(0,0,0,0.08)" stroke-width="1.5"/>
+
+            <!-- Bootie Body (main) -->
+            <path id="bootieBody" d="
+              M 100 370
+              L 100 180
+              Q 100 120 130 100
+              Q 160 80 200 78
+              Q 240 80 270 100
+              Q 300 120 300 180
+              L 300 370
+              Q 300 380 280 380
+              L 120 380
+              Q 100 380 100 370
+              Z" fill="#E8A0B4" filter="url(#shadow)" stroke="rgba(0,0,0,0.04)"/>
+
+            <!-- Ankle Ribbing -->
+            <path id="bootieRib" d="
+              M 100 180
+              Q 100 140 130 120
+              Q 160 100 200 98
+              Q 240 100 270 120
+              Q 300 140 300 180
+              " fill="none" stroke="rgba(0,0,0,0.06)" stroke-width="18" stroke-dasharray="4 4"/>
+
+            <!-- Top Opening -->
+            <ellipse id="bootieOpening" cx="200" cy="85" rx="70" ry="14" fill="rgba(0,0,0,0.04)"/>
+
+            <!-- Body highlight -->
+            <path id="bootieHighlight" d="
+              M 120 370 L 120 200
+              Q 120 150 145 130
+              " fill="none" stroke="rgba(255,255,255,0.2)" stroke-width="12" stroke-linecap="round"/>
+
+            <!-- Toe Cap detail -->
+            <path id="bootieToe" d="
+              M 105 340 Q 85 320 80 290 Q 78 270 90 260
+              " fill="none" stroke="rgba(0,0,0,0.04)" stroke-width="2"/>
+
+            <!-- Decorative Stitching -->
+            <path d="M 115 360 L 115 200 M 285 360 L 285 200"
+                  fill="none" stroke="rgba(255,255,255,0.15)" stroke-width="1.5" stroke-dasharray="3 3"/>
+
+            <!-- Little bow at front -->
+            <g id="bootieBow" transform="translate(200, 160)">
+              <path d="M -3 -6 C -10 -12 -16 -6 -10 0 C -6 3 -3 1 0 0"
+                    fill="rgba(0,0,0,0.1)" stroke="rgba(255,255,255,0.2)" stroke-width="0.5"/>
+              <path d="M 3 -6 C 10 -12 16 -6 10 0 C 6 3 3 1 0 0"
+                    fill="rgba(0,0,0,0.1)" stroke="rgba(255,255,255,0.2)" stroke-width="0.5"/>
+              <circle cx="0" cy="0" r="2" fill="rgba(0,0,0,0.08)"/>
+            </g>
+
+            <!-- Warmth lines coming off -->
+            <g opacity="0.15">
+              <path d="M 330 200 Q 350 190 360 170" fill="none" stroke="#E8A0B4" stroke-width="2"/>
+              <path d="M 340 230 Q 360 220 370 200" fill="none" stroke="#E8A0B4" stroke-width="2"/>
+              <path d="M 335 260 Q 355 250 365 230" fill="none" stroke="#E8A0B4" stroke-width="2"/>
+            </g>
+
+            <!-- Side Bootie (shown on alternative view) -->
+            <g id="bootieSideView" style="display:none" transform="translate(80, 20)">
+              <ellipse cx="200" cy="410" rx="120" ry="12" fill="rgba(0,0,0,0.06)"/>
+              <path d="M 90 370 L 90 200 Q 90 140 120 110 Q 150 85 200 82 Q 250 85 280 110 Q 310 140 310 200 L 310 370 Q 310 380 290 380 L 110 380 Q 90 380 90 370 Z" fill="#E8A0B4" filter="url(#shadow)"/>
+              <path id="heelPatch" d="M 90 300 Q 85 280 88 250 Q 92 220 100 200" fill="none" stroke="rgba(0,0,0,0.05)" stroke-width="15"/>
+            </g>
+          </svg>
+        </div>
+        <div class="view-toggle reveal reveal-delay-3">
+          <button class="view-btn active" onclick="switchView('front')">👟 Front View</button>
+          <button class="view-btn" onclick="switchView('side')">↔️ Side View</button>
+          <button class="view-btn" onclick="switchView('spin')">🔄 Auto-Spin</button>
+        </div>
+      </div>
+
+      <!-- RIGHT: Controls -->
+      <div class="customizer-controls reveal reveal-delay-2">
+        <div class="color-section">
+          <h4>🎨 Body Color</h4>
+          <div class="swatch-grid" id="bodyColorSwatches"></div>
+        </div>
+        <div class="color-section">
+          <h4>🎀 Accent Trim</h4>
+          <div class="swatch-grid" id="accentColorSwatches"></div>
+        </div>
+
+        <div class="size-section">
+          <h4>📏 Size</h4>
+          <div class="size-grid" id="sizeGrid">
+            <button class="size-btn" data-size="XS" data-length="0-3mo">XS <small>0-3 months</small></button>
+            <button class="size-btn" data-size="S" data-length="3-6mo">S <small>3-6 months</small></button>
+            <button class="size-btn active" data-size="M" data-length="6-9mo">M <small>6-9 months</small></button>
+            <button class="size-btn" data-size="L" data-length="9-12mo">L <small>9-12 months</small></button>
+            <button class="size-btn" data-size="XL" data-length="12-18mo">XL <small>12-18 months</small></button>
+            <button class="size-btn" data-size="XXL" data-length="18-24mo">XXL <small>18-24 months</small></button>
+          </div>
+        </div>
+
+        <div class="customizer-actions">
+          <div class="price-display">
+            <div class="label">Your Custom Pair</div>
+            <div class="amount" id="customPrice">₹799</div>
+          </div>
+          <button class="btn btn-gold" onclick="addCustomToCart()" style="font-size:1.1rem;padding:16px 32px;">
+            🛒 Add to Cart
+          </button>
+          <a href="/" class="btn btn-secondary" style="justify-content:center;">← Back to Store</a>
+        </div>
+
+        <div class="recommender-section" id="sizeRecommender">
+          <h4>🤖 Smart Size Finder</h4>
+          <p style="font-size:0.85rem;color:var(--text-light);margin-bottom:16px;">Not sure what size? Tell us about your baby.</p>
+          <div class="recommender-form">
+            <div>
+              <label>Baby's Age</label>
+              <select id="recAge">
+                <option value="">Select age</option>
+                <option value="0-3">0-3 months</option>
+                <option value="3-6">3-6 months</option>
+                <option value="6-9">6-9 months</option>
+                <option value="9-12">9-12 months</option>
+                <option value="12-18">12-18 months</option>
+                <option value="18-24">18-24 months</option>
+              </select>
+            </div>
+            <div>
+              <label>Weight (approx)</label>
+              <select id="recWeight">
+                <option value="">Select weight</option>
+                <option value="light">&lt; 5 kg</option>
+                <option value="medium">5-9 kg</option>
+                <option value="heavy">9-12 kg</option>
+                <option value="xheavy">&gt; 12 kg</option>
+              </select>
+            </div>
+            <div class="full">
+              <label>Walking stage</label>
+              <select id="recWalking">
+                <option value="">Select stage</option>
+                <option value="pre">Not yet crawling</option>
+                <option value="crawling">Crawling</option>
+                <option value="cruising">Cruising (holding furniture)</option>
+                <option value="walking">Walking independently</option>
+                <option value="running">Running / very active</option>
+              </select>
+            </div>
+            <div class="full">
+              <button class="btn btn-primary" onclick="recommendSize()" style="justify-content:center;width:100%;">🎯 Find My Size</button>
+            </div>
+          </div>
+          <div class="recommender-result" id="recResult">
+            We recommend size <strong id="recSize">M</strong> (<span id="recSizeRange">6-9 months</span>)
+            <br><small style="color:var(--text-light);">Based on your baby's development stage</small>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+const COLORS = [
+  { name: "Blush Pink", hex: "#E8A0B4" },
+  { name: "Mint Green", hex: "#86C7A1" },
+  { name: "Cream", hex: "#F5E6CC" },
+  { name: "Navy Blue", hex: "#4A6FA5" },
+  { name: "Grey", hex: "#A8A8B0" },
+  { name: "Walnut Brown", hex: "#8B6F47" },
+  { name: "Lavender", hex: "#C9A0DC" },
+  { name: "Peach", hex: "#F5B895" },
+  { name: "Dusty Rose", hex: "#C4848C" },
+  { name: "Forest", hex: "#5A8F6A" },
+];
+
+const ACCENTS = [
+  { name: "White", hex: "#FFFFFF" },
+  { name: "Gold", hex: "#D4A853" },
+  { name: "Silver", hex: "#C0C0C0" },
+  { name: "Pink", hex: "#E8A0B4" },
+  { name: "Navy", hex: "#1a1a2e" },
+  { name: "Cream", hex: "#FDF6F0" },
+];
+
+let currentBodyColor = "#E8A0B4";
+let currentAccentColor = "#FFFFFF";
+let currentView = "front";
+let selectedSize = "M";
+let spinInterval = null;
+
+// Size -> Price mapping
+const sizePrices = { XS: 599, S: 599, M: 799, L: 799, XL: 1299, XXL: 1299 };
+
+function initColorSwatches() {
+  const bodyContainer = document.getElementById("bodyColorSwatches");
+  const accentContainer = document.getElementById("accentColorSwatches");
+
+  COLORS.forEach((c, i) => {
+    const btn = document.createElement("button");
+    btn.className = "swatch-btn" + (i === 0 ? " active" : "");
+    btn.style.background = c.hex;
+    btn.innerHTML = `<span class="tooltip">${c.name}</span>`;
+    btn.onclick = () => setBodyColor(c.hex, btn);
+    bodyContainer.appendChild(btn);
+  });
+
+  ACCENTS.forEach((c, i) => {
+    const btn = document.createElement("button");
+    btn.className = "swatch-btn" + (i === 0 ? " active" : "");
+    btn.style.background = c.hex;
+    btn.style.border = c.hex === "#FFFFFF" ? "3px solid #ddd" : "3px solid transparent";
+    if (c.hex === "#FFFFFF") btn.style.borderColor = "#ccc";
+    btn.innerHTML = `<span class="tooltip">${c.name}</span>`;
+    btn.onclick = () => setAccentColor(c.hex, btn);
+    accentContainer.appendChild(btn);
+  });
+}
+
+function setBodyColor(hex, el) {
+  currentBodyColor = hex;
+  document.querySelectorAll("#bodyColorSwatches .swatch-btn").forEach(b => b.classList.remove("active"));
+  el.classList.add("active");
+
+  document.querySelectorAll("#bootieBody, #bootieSideView path:not(#heelPatch), .view-btn + g path").forEach(el => {
+    if (el.getAttribute("fill") && el.getAttribute("fill") !== "none" && !el.getAttribute("id")?.includes("Grad")) {
+      el.style.fill = hex;
+    }
+  });
+  document.getElementById("bootieBody").style.fill = hex;
+
+  const warmthLines = document.querySelectorAll('g[opacity="0.15"] path');
+  warmthLines.forEach(l => l.setAttribute("stroke", hex));
+}
+
+function setAccentColor(hex, el) {
+  currentAccentColor = hex;
+  document.querySelectorAll("#accentColorSwatches .swatch-btn").forEach(b => b.classList.remove("active"));
+  el.classList.add("active");
+  document.getElementById("bootieBow").style.fill = hex;
+}
+
+function switchView(view) {
+  currentView = view;
+  document.querySelectorAll(".view-btn").forEach(b => b.classList.remove("active"));
+  event.target.classList.add("active");
+
+  if (spinInterval) { clearInterval(spinInterval); spinInterval = null; }
+
+  const frontEls = document.querySelector("#bootieScene svg").querySelectorAll(":scope > *:not(defs)");
+  const sideEls = document.getElementById("bootieSideView");
+
+  if (view === "front") {
+    frontEls.forEach(el => { if (el.id !== "bootieSideView") el.style.display = ""; });
+    sideEls.style.display = "none";
+  } else if (view === "side") {
+    frontEls.forEach(el => { if (el.id !== "bootieSideView") el.style.display = "none"; });
+    sideEls.style.display = "";
+  } else if (view === "spin") {
+    frontEls.forEach(el => { if (el.id !== "bootieSideView") el.style.display = ""; });
+    sideEls.style.display = "none";
+    let angle = 0;
+    spinInterval = setInterval(() => {
+      angle += 2;
+      document.getElementById("bootieScene").style.transform = `perspective(800px) rotateY(${Math.sin(angle * Math.PI / 180) * 15}deg)`;
+      document.getElementById("bootieScene").style.transition = "transform 0.05s linear";
+    }, 50);
+  }
+  document.getElementById("bootieScene").style.transform = view !== "spin" ? "" : document.getElementById("bootieScene").style.transform;
+}
+
+function selectSize(el) {
+  document.querySelectorAll(".size-btn").forEach(b => b.classList.remove("active"));
+  el.classList.add("active");
+  selectedSize = el.dataset.size;
+  const price = sizePrices[selectedSize] || 799;
+  document.getElementById("customPrice").textContent = `₹${price}`;
+}
+
+document.getElementById("sizeGrid").addEventListener("click", (e) => {
+  const btn = e.target.closest(".size-btn");
+  if (btn) selectSize(btn);
+});
+
+function addCustomToCart() {
+  try {
+    let cart = JSON.parse(localStorage.getItem("croshara_cart") || "[]");
+    const price = sizePrices[selectedSize] || 799;
+    const existing = cart.find(c => c.id === "custom" && c.selectedSize === selectedSize && c.bodyColor === currentBodyColor);
+    if (existing) {
+      existing.qty += 1;
+    } else {
+      cart.push({
+        id: "custom",
+        name: `Custom ${selectedSize} Booties`,
+        price,
+        qty: 1,
+        selectedSize,
+        selectedColor: COLORS.find(c => c.hex === currentBodyColor)?.name || "Custom",
+        bodyColor: currentBodyColor,
+        accentColor: currentAccentColor,
+      });
+    }
+    localStorage.setItem("croshara_cart", JSON.stringify(cart));
+    const notif = document.getElementById("notif");
+    notif.textContent = `✅ Custom ${selectedSize} added to cart!`;
+    notif.classList.add("show");
+    setTimeout(() => notif.classList.remove("show"), 2500);
+    if (typeof updateCartUI === "function") updateCartUI();
+  } catch (e) { console.error(e); }
+}
+
+function recommendSize() {
+  const age = document.getElementById("recAge").value;
+  const weight = document.getElementById("recWeight").value;
+  const walking = document.getElementById("recWalking").value;
+  const result = document.getElementById("recResult");
+  const sizeEl = document.getElementById("recSize");
+  const rangeEl = document.getElementById("recSizeRange");
+
+  let size = "M", range = "6-9 months";
+
+  const ageMap = {
+    "0-3": ["XS", "0-3 months"],
+    "3-6": ["S", "3-6 months"],
+    "6-9": ["M", "6-9 months"],
+    "9-12": ["L", "9-12 months"],
+    "12-18": ["XL", "12-18 months"],
+    "18-24": ["XXL", "18-24 months"],
+  };
+
+  if (age && ageMap[age]) {
+    [size, range] = ageMap[age];
+  }
+
+  // Adjust for walking stage
+  if (walking === "running") {
+    const ups = { XS: "S", S: "M", M: "L", L: "XL", XL: "XXL", XXL: "XXL" };
+    size = ups[size] || size;
+  }
+  if (walking === "pre" && ["XL", "XXL"].includes(size)) {
+    size = "L"; range = "9-12 months";
+  }
+
+  // Weight adjustment
+  if (weight === "xheavy" && ["XS", "S"].includes(size)) {
+    size = "M"; range = "6-9 months";
+  }
+
+  sizeEl.textContent = size;
+  rangeEl.textContent = range;
+  result.classList.add("show");
+}
+
+initColorSwatches();
+
+document.querySelectorAll(".size-btn").forEach(b => {
+  b.addEventListener("click", () => selectSize(b));
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CROSHARA – Admin Dashboard</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    :root {
+      --cream: #FDF6F0; --pink: #E8A0B4; --pink-dark: #D4809A;
+      --navy: #1a1a2e; --white: #ffffff; --text: #2d2d3a; --text-light: #6b6b80;
+      --shadow: 0 4px 24px rgba(26,26,46,0.06);
+      --radius: 16px; --radius-sm: 10px;
+    }
+    body { font-family: 'Inter', sans-serif; background: #f8f4f0; color: var(--text); }
+    .app { display: flex; min-height: 100vh; }
+
+    /* SIDEBAR */
+    .sidebar { width: 260px; background: var(--navy); color: var(--white); padding: 24px; display: flex; flex-direction: column; position: fixed; top: 0; left: 0; height: 100vh; z-index: 100; }
+    .sidebar .logo { font-family: 'Playfair Display', serif; font-size: 1.5rem; font-weight: 700; margin-bottom: 32px; }
+    .sidebar .logo span { color: var(--pink); }
+    .sidebar .logo small { display: block; font-family: 'Inter', sans-serif; font-size: 0.7rem; font-weight: 400; opacity: 0.5; }
+    .sidebar nav { display: flex; flex-direction: column; gap: 4px; flex: 1; }
+    .sidebar nav a { color: rgba(255,255,255,0.6); text-decoration: none; padding: 12px 16px; border-radius: var(--radius-sm); transition: all 0.3s; font-size: 0.9rem; font-weight: 500; display: flex; align-items: center; gap: 12px; }
+    .sidebar nav a:hover, .sidebar nav a.active { background: rgba(255,255,255,0.08); color: var(--white); }
+    .sidebar-bottom { border-top: 1px solid rgba(255,255,255,0.08); padding-top: 16px; }
+    .sidebar-bottom a { color: rgba(255,255,255,0.4); text-decoration: none; font-size: 0.85rem; display: flex; align-items: center; gap: 8px; padding: 8px 0; transition: all 0.3s; }
+    .sidebar-bottom a:hover { color: var(--white); }
+
+    /* MAIN */
+    .main { flex: 1; margin-left: 260px; padding: 32px; }
+    .header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 32px; flex-wrap: wrap; gap: 16px; }
+    .header h1 { font-family: 'Playfair Display', serif; font-size: 1.8rem; color: var(--navy); }
+    .header .date { color: var(--text-light); font-size: 0.9rem; }
+    .header-actions { display: flex; gap: 12px; align-items: center; }
+    .status-badge { display: flex; align-items: center; gap: 6px; padding: 8px 16px; border-radius: 50px; font-size: 0.85rem; font-weight: 500; }
+    .status-badge.live { background: rgba(34,197,94,0.1); color: #22c55e; }
+    .status-badge .dot { width: 8px; height: 8px; border-radius: 50%; background: #22c55e; animation: pulse 2s infinite; }
+    @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
+    .refresh-btn { padding: 8px 16px; border-radius: 50px; border: 1px solid rgba(0,0,0,0.1); background: var(--white); cursor: pointer; font-size: 0.85rem; transition: all 0.3s; }
+    .refresh-btn:hover { border-color: var(--pink); color: var(--pink); }
+    .refresh-btn.loading { animation: spin 1s linear infinite; }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    /* STATS */
+    .stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-bottom: 32px; }
+    .stat-card { background: var(--white); border-radius: var(--radius); padding: 24px; box-shadow: var(--shadow); }
+    .stat-card .label { font-size: 0.8rem; color: var(--text-light); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 8px; }
+    .stat-card .value { font-size: 2rem; font-weight: 700; color: var(--navy); }
+    .stat-card .change { font-size: 0.8rem; margin-top: 4px; }
+    .stat-card .change.up { color: #22c55e; }
+    .stat-card .change.down { color: #ef4444; }
+    .stat-card .icon { font-size: 1.5rem; margin-bottom: 8px; }
+
+    /* CHARTS */
+    .charts-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 32px; }
+    .chart-card { background: var(--white); border-radius: var(--radius); padding: 24px; box-shadow: var(--shadow); }
+    .chart-card h3 { font-size: 1rem; margin-bottom: 16px; color: var(--navy); }
+    .chart-placeholder { height: 200px; display: flex; align-items: flex-end; gap: 8px; padding-top: 16px; }
+    .bar { flex: 1; border-radius: 4px 4px 0 0; background: linear-gradient(180deg, var(--pink), var(--pink-dark)); transition: height 0.8s ease; min-height: 4px; position: relative; }
+    .bar .bar-label { position: absolute; bottom: -20px; left: 50%; transform: translateX(-50%); font-size: 0.65rem; color: var(--text-light); white-space: nowrap; }
+    .bar .bar-value { position: absolute; top: -18px; left: 50%; transform: translateX(-50%); font-size: 0.7rem; font-weight: 600; color: var(--navy); }
+
+    /* TABLES */
+    .card { background: var(--white); border-radius: var(--radius); padding: 24px; box-shadow: var(--shadow); margin-bottom: 16px; }
+    .card-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; }
+    .card-header h3 { font-size: 1rem; color: var(--navy); }
+    .card-header .count { font-size: 0.85rem; color: var(--text-light); }
+    table { width: 100%; border-collapse: collapse; }
+    th { text-align: left; padding: 12px 16px; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.5px; color: var(--text-light); font-weight: 500; border-bottom: 2px solid var(--cream); }
+    td { padding: 12px 16px; font-size: 0.85rem; border-bottom: 1px solid rgba(0,0,0,0.04); }
+    tr:hover td { background: rgba(232,160,180,0.04); }
+    .status-confirmed { background: rgba(34,197,94,0.1); color: #22c55e; padding: 4px 12px; border-radius: 50px; font-size: 0.75rem; font-weight: 600; }
+    .status-pending { background: rgba(245,158,11,0.1); color: #f59e0b; padding: 4px 12px; border-radius: 50px; font-size: 0.75rem; font-weight: 600; }
+
+    .empty-state { text-align: center; padding: 60px 20px; color: var(--text-light); }
+    .empty-state .icon { font-size: 3rem; margin-bottom: 12px; opacity: 0.3; }
+    .empty-state h3 { font-size: 1.1rem; margin-bottom: 4px; }
+
+    .toast { position: fixed; bottom: 24px; right: 24px; background: var(--navy); color: var(--white); padding: 16px 24px; border-radius: var(--radius-sm); box-shadow: 0 10px 40px rgba(0,0,0,0.2); transform: translateY(120%); transition: transform 0.5s ease; z-index: 1000; }
+    .toast.show { transform: translateY(0); }
+
+    @media (max-width: 968px) { .sidebar { width: 200px; } .main { margin-left: 200px; } .stats-grid { grid-template-columns: repeat(2, 1fr); } .charts-grid { grid-template-columns: 1fr; } }
+    @media (max-width: 576px) { .sidebar { display: none; } .main { margin-left: 0; } .stats-grid { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body>
+<div class="app">
+  <aside class="sidebar">
+    <div class="logo">CROSHARA<span>.</span> <small>Admin Panel</small></div>
+    <nav>
+      <a href="#" class="active" onclick="return switchTab('dashboard', this)">📊 Dashboard</a>
+      <a href="#" onclick="return switchTab('orders', this)">📦 Orders</a>
+      <a href="#" onclick="return switchTab('customers', this)">👥 Customers</a>
+      <a href="#" onclick="return switchTab('analytics', this)">📈 Analytics</a>
+    </nav>
+    <div class="sidebar-bottom">
+      <a href="/">← Back to Store</a>
+    </div>
+  </aside>
+
+  <main class="main">
+    <div class="header">
+      <div>
+        <h1 id="pageTitle">Dashboard</h1>
+        <div class="date" id="currentDate"></div>
+      </div>
+      <div class="header-actions">
+        <div class="status-badge live"><span class="dot"></span> Live</div>
+        <button class="refresh-btn" onclick="refreshData()">🔄 Refresh</button>
+      </div>
+    </div>
+
+    <!-- Dashboard Tab -->
+    <div id="tab-dashboard">
+      <div class="stats-grid" id="statsGrid">
+        <div class="stat-card"><div class="icon">📦</div><div class="label">Total Orders</div><div class="value" id="statOrders">0</div><div class="change up" id="statOrdersChange">+0 today</div></div>
+        <div class="stat-card"><div class="icon">💰</div><div class="label">Revenue</div><div class="value" id="statRevenue">₹0</div><div class="change up" id="statRevenueChange">+₹0 today</div></div>
+        <div class="stat-card"><div class="icon">👶</div><div class="label">Products Sold</div><div class="value" id="statSold">0</div><div class="change up" id="statSoldChange">+0 today</div></div>
+        <div class="stat-card"><div class="icon">📧</div><div class="label">Newsletter</div><div class="value" id="statSubs">0</div><div class="change" id="statSubsChange">subscribers</div></div>
+      </div>
+
+      <div class="charts-grid">
+        <div class="chart-card">
+          <h3>📊 Last 7 Days Orders</h3>
+          <div class="chart-placeholder" id="weeklyChart"></div>
+        </div>
+        <div class="chart-card">
+          <h3>🎨 Popular Colors</h3>
+          <div class="chart-placeholder" id="colorChart"></div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header"><h3>🕐 Recent Orders</h3><span class="count" id="recentCount">0</span></div>
+        <div id="recentOrders"><div class="empty-state"><div class="icon">📦</div><h3>No orders yet</h3><p>Orders will appear here once customers start buying</p></div></div>
+      </div>
+    </div>
+
+    <!-- Orders Tab -->
+    <div id="tab-orders" style="display:none">
+      <div class="card">
+        <div class="card-header"><h3>📦 All Orders</h3><span class="count" id="allOrdersCount">0</span></div>
+        <div id="allOrders"><div class="empty-state"><div class="icon">📦</div><h3>No orders yet</h3></div></div>
+      </div>
+    </div>
+
+    <!-- Customers Tab -->
+    <div id="tab-customers" style="display:none">
+      <div class="card">
+        <div class="card-header"><h3>👥 Contacts & Inquiries</h3><span class="count" id="contactsCount">0</span></div>
+        <div id="contactsList"><div class="empty-state"><div class="icon">👥</div><h3>No contacts yet</h3></div></div>
+      </div>
+    </div>
+
+    <!-- Analytics Tab -->
+    <div id="tab-analytics" style="display:none">
+      <div class="card">
+        <div class="card-header"><h3>📈 Business Summary</h3></div>
+        <div id="analyticsContent">
+          <div class="stats-grid" style="margin-bottom:0">
+            <div class="stat-card"><div class="label">Avg Order Value</div><div class="value" id="avgOrder">₹0</div></div>
+            <div class="stat-card"><div class="label">Most Popular Size</div><div class="value" id="topSize">—</div></div>
+            <div class="stat-card"><div class="label">Most Popular Color</div><div class="value" id="topColor">—</div></div>
+            <div class="stat-card"><div class="label">Conversion Rate</div><div class="value" id="conversionRate">—</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+</div>
+
+<div class="toast" id="toast">✅ Data refreshed</div>
+
+<script>
+const API_BASE = window.location.origin;
+let allOrders = [];
+let allContacts = [];
+
+document.addEventListener("DOMContentLoaded", () => {
+  document.getElementById("currentDate").textContent = new Date().toLocaleDateString("en-IN", { weekday: "long", year: "numeric", month: "long", day: "numeric" });
+  refreshData();
+  setInterval(refreshData, 30000);
+});
+
+async function refreshData() {
+  const btn = document.querySelector(".refresh-btn");
+  try {
+    await Promise.all([fetchOrders(), fetchContacts(), fetchSubs()]);
+  } catch (e) {
+    console.warn("Some data unavailable");
+  }
+}
+
+async function fetchOrders() {
+  try {
+    const res = await fetch(`${API_BASE}/api/orders`);
+    const data = await res.json();
+    allOrders = data.orders || [];
+    renderOrders();
+    renderStats();
+    renderCharts();
+    renderAnalytics();
+  } catch { /* silent */ }
+}
+
+async function fetchContacts() {
+  try {
+    const res = await fetch(`${API_BASE}/api/contacts`);
+    const data = await res.json();
+    allContacts = data.contacts || [];
+    renderContacts();
+  } catch { /* silent */ }
+}
+
+async function fetchSubs() {
+  try {
+    const res = await fetch(`${API_BASE}/api/newsletter/count`);
+    const data = await res.json();
+    document.getElementById("statSubs").textContent = data.count || 0;
+  } catch { /* silent */ }
+}
+
+function renderOrders() {
+  // Recent orders (last 5)
+  const recent = allOrders.slice(-5).reverse();
+  const recentContainer = document.getElementById("recentOrders");
+  const allContainer = document.getElementById("allOrders");
+  document.getElementById("recentCount").textContent = `(${allOrders.length} total)`;
+  document.getElementById("allOrdersCount").textContent = allOrders.length;
+
+  if (!allOrders.length) return;
+
+  const orderRows = (orders) => `
+    <table>
+      <thead><tr><th>Order</th><th>Customer</th><th>Items</th><th>Amount</th><th>Status</th><th>Date</th></tr></thead>
+      <tbody>
+        ${orders.map(o => `
+          <tr>
+            <td><strong>#${o.id?.slice(0, 8)}</strong></td>
+            <td>${o.customer?.name || "N/A"}<br><small style="color:var(--text-light)">${o.customer?.phone || ""}</small></td>
+            <td>${(o.items || []).map(i => `${i.qty}x ${i.name}`).join(", ")}</td>
+            <td><strong>₹${o.amount || 0}</strong></td>
+            <td><span class="status-confirmed">${o.status || "confirmed"}</span></td>
+            <td>${new Date(o.createdAt).toLocaleDateString("en-IN")}</td>
+          </tr>
+        `).join("")}
+      </tbody>
+    </table>
+  `;
+
+  recentContainer.innerHTML = orderRows(recent);
+  allContainer.innerHTML = orderRows(allOrders);
+}
+
+function renderStats() {
+  const total = allOrders.length;
+  const revenue = allOrders.reduce((s, o) => s + (o.amount || 0), 0);
+  const sold = allOrders.reduce((s, o) => s + (o.items || []).reduce((a, i) => a + (i.qty || 0), 0), 0);
+  const today = allOrders.filter(o => new Date(o.createdAt).toDateString() === new Date().toDateString());
+
+  document.getElementById("statOrders").textContent = total;
+  document.getElementById("statRevenue").textContent = `₹${revenue}`;
+  document.getElementById("statSold").textContent = sold;
+  document.getElementById("statOrdersChange").textContent = `+${today.length} today`;
+  document.getElementById("statRevenueChange").textContent = `+₹${today.reduce((s, o) => s + (o.amount || 0), 0)} today`;
+  document.getElementById("statSoldChange").textContent = `+${today.reduce((s, o) => s + (o.items || []).reduce((a, i) => a + (i.qty || 0), 0), 0)} today`;
+}
+
+function renderCharts() {
+  // Weekly chart
+  const days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+  const weeklyData = days.map(d => ({ day: d, count: 0 }));
+  allOrders.forEach(o => {
+    const d = new Date(o.createdAt);
+    const diff = Math.floor((Date.now() - d.getTime()) / (1000 * 60 * 60 * 24));
+    if (diff < 7) weeklyData[d.getDay()].count += 1;
+  });
+
+  const maxCount = Math.max(...weeklyData.map(w => w.count), 1);
+  const weekChart = document.getElementById("weeklyChart");
+  weekChart.innerHTML = weeklyData.map(w => `
+    <div class="bar" style="height:${(w.count / maxCount) * 160 + 20}px">
+      <span class="bar-value">${w.count}</span>
+      <span class="bar-label">${w.day}</span>
+    </div>
+  `).join("");
+
+  // Color chart
+  const colorCount = {};
+  const colorNames = ["Blush Pink", "Mint Green", "Cream", "Navy Blue", "Grey", "Walnut Brown"];
+  colorNames.forEach(c => colorCount[c] = 0);
+
+  allOrders.forEach(o => {
+    (o.items || []).forEach(i => {
+      if (colorCount[i.color] !== undefined) colorCount[i.color] += i.qty;
+    });
+  });
+
+  const maxColor = Math.max(...Object.values(colorCount), 1);
+  const colorChart = document.getElementById("colorChart");
+  const colorHex = { "Blush Pink": "#E8A0B4", "Mint Green": "#86C7A1", "Cream": "#F5E6CC", "Navy Blue": "#4A6FA5", "Grey": "#A8A8B0", "Walnut Brown": "#8B6F47" };
+  colorChart.innerHTML = Object.entries(colorCount).map(([name, count]) => `
+    <div class="bar" style="height:${(count / maxColor) * 160 + 20}px;background:${colorHex[name] || '#ddd'}">
+      <span class="bar-value">${count}</span>
+      <span class="bar-label" style="font-size:0.6rem">${name.split(" ")[0]}</span>
+    </div>
+  `).join("");
+}
+
+function renderContacts() {
+  document.getElementById("contactsCount").textContent = allContacts.length;
+  const container = document.getElementById("contactsList");
+  if (!allContacts.length) return;
+
+  container.innerHTML = `
+    <table>
+      <thead><tr><th>Name</th><th>Email</th><th>Phone</th><th>Message</th><th>Date</th></tr></thead>
+      <tbody>
+        ${allContacts.slice().reverse().map(c => `
+          <tr>
+            <td><strong>${c.name || "N/A"}</strong></td>
+            <td>${c.email || ""}</td>
+            <td>${c.phone || ""}</td>
+            <td>${(c.message || "").slice(0, 50)}${(c.message || "").length > 50 ? "..." : ""}</td>
+            <td>${new Date(c.createdAt).toLocaleDateString("en-IN")}</td>
+          </tr>
+        `).join("")}
+      </tbody>
+    </table>
+  `;
+}
+
+function renderAnalytics() {
+  if (!allOrders.length) return;
+  const revenue = allOrders.reduce((s, o) => s + (o.amount || 0), 0);
+  const avg = Math.round(revenue / allOrders.length);
+
+  const sizeCount = {};
+  const colorCount = {};
+  allOrders.forEach(o => {
+    (o.items || []).forEach(i => {
+      if (i.size) sizeCount[i.size] = (sizeCount[i.size] || 0) + i.qty;
+      if (i.color) colorCount[i.color] = (colorCount[i.color] || 0) + i.qty;
+    });
+  });
+
+  const topSize = Object.entries(sizeCount).sort((a, b) => b[1] - a[1])[0];
+  const topColor = Object.entries(colorCount).sort((a, b) => b[1] - a[1])[0];
+
+  document.getElementById("avgOrder").textContent = `₹${avg}`;
+  document.getElementById("topSize").textContent = topSize ? `${topSize[0]} (${topSize[1]} sold)` : "—";
+  document.getElementById("topColor").textContent = topColor ? `${topColor[0]} (${topColor[1]} sold)` : "—";
+}
+
+function switchTab(tab, el) {
+  document.querySelectorAll(".sidebar nav a").forEach(a => a.classList.remove("active"));
+  if (el) el.classList.add("active");
+
+  document.querySelectorAll("[id^='tab-']").forEach(t => t.style.display = "none");
+  document.getElementById(`tab-${tab}`).style.display = "block";
+
+  const titles = { dashboard: "Dashboard", orders: "Orders", customers: "Customers", analytics: "Analytics" };
+  document.getElementById("pageTitle").textContent = titles[tab] || "Dashboard";
+  return false;
+}
+</script>
+</body>
+</html>
