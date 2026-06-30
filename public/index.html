@@ -13,9 +13,6 @@
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🧶</text></svg>">
   <link rel="stylesheet" href="/css/style.css">
   <title>CROSHARA – Handmade Baby Wool Booties | India's Barefoot-Friendly Brand</title>
-  <script>
-    window.RAZORPAY_KEY_ID = "rzp_test_placeholder";
-  </script>
 </head>
 <body>
 
@@ -30,11 +27,7 @@
         <li><a href="#testimonials">Reviews</a></li>
         <li><a href="#sizing">Size Guide</a></li>
         <li><a href="#faq">FAQ</a></li>
-        <li>
-          <button class="cart-btn" id="cartToggle" aria-label="Open cart">
-            🛒<span class="cart-count" id="cartCount">0</span>
-          </button>
-        </li>
+        <li><a href="https://www.instagram.com/crosharahandmade" target="_blank" rel="noopener" style="color:var(--pink-dark);font-weight:600;">📩 DM to Order</a></li>
       </ul>
       <button class="mobile-toggle" aria-label="Toggle menu">
         <span></span><span></span><span></span>
@@ -51,7 +44,7 @@
         <h1>Handmade Wool Booties<br>for <span class="highlight">Tiny Explorers</span></h1>
         <p>Pure natural wool. Handcrafted by Indian artisans. Barefoot-friendly flexible soles. Because your baby's first steps deserve the best.</p>
         <div class="hero-buttons">
-          <a href="#products" class="btn btn-primary">✨ Shop Collection</a>
+          <a href="https://www.instagram.com/crosharahandmade" target="_blank" rel="noopener" class="btn btn-primary">📩 DM to Order</a>
           <a href="#story" class="btn btn-secondary">Our Story</a>
         </div>
       </div>
@@ -481,53 +474,6 @@
     </div>
   </footer>
 
-  <!-- ===== CART MODAL ===== -->
-  <div class="cart-overlay" id="cartOverlay"></div>
-  <div class="cart-modal" id="cartModal">
-    <div class="cart-header">
-      <h2>🛒 Your Cart</h2>
-      <button class="cart-close" id="cartClose">✕</button>
-    </div>
-    <div class="cart-items" id="cartItems">
-      <div class="cart-empty">
-        <div class="icon">🛒</div>
-        <h3>Your cart is empty</h3>
-        <p style="color:var(--text-light);margin-top:8px">Add some booties to get started!</p>
-      </div>
-    </div>
-    <div class="checkout-form" id="checkoutForm">
-      <h3>Shipping Details</h3>
-      <div class="form-group">
-        <label>Full Name</label>
-        <input type="text" id="cfName" placeholder="Your full name" required>
-      </div>
-      <div class="form-row">
-        <div class="form-group">
-          <label>Email</label>
-          <input type="email" id="cfEmail" placeholder="your@email.com" required>
-        </div>
-        <div class="form-group">
-          <label>Phone</label>
-          <input type="tel" id="cfPhone" placeholder="9876543210" required>
-        </div>
-      </div>
-      <div class="form-group">
-        <label>Delivery Address</label>
-        <input type="text" id="cfAddress" placeholder="House, street, city, pincode" required>
-      </div>
-      <button class="btn btn-primary" onclick="placeOrder()">💳 Pay & Place Order</button>
-      <button class="btn btn-secondary" onclick="hideCheckout()" style="width:100%;justify-content:center;">← Back to Cart</button>
-    </div>
-    <div class="cart-footer" id="cartFooter">
-      <div class="cart-total">
-        <span>Total</span>
-        <span class="amount" id="cartTotalAmount">₹0</span>
-      </div>
-      <button class="btn btn-gold" onclick="showCheckout()">Continue to Checkout →</button>
-    </div>
-  </div>
-
-  <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
   <script src="/js/main.js"></script>
 </body>
 </html>

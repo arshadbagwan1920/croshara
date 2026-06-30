@@ -71,7 +71,6 @@
   </div>
 </nav>
 
-<div class="floating-notif" id="notif">✅ Added to cart!</div>
 
 <section class="section">
   <div class="container">
@@ -201,9 +200,9 @@
             <div class="label">Your Custom Pair</div>
             <div class="amount" id="customPrice">₹799</div>
           </div>
-          <button class="btn btn-gold" onclick="addCustomToCart()" style="font-size:1.1rem;padding:16px 32px;">
-            🛒 Add to Cart
-          </button>
+          <a href="https://www.instagram.com/crosharahandmade" target="_blank" rel="noopener" class="btn btn-gold" style="font-size:1.1rem;padding:16px 32px;justify-content:center;text-decoration:none;">
+            📩 DM to Order on Instagram
+          </a>
           <a href="/" class="btn btn-secondary" style="justify-content:center;">← Back to Store</a>
         </div>
 
@@ -379,34 +378,6 @@ document.getElementById("sizeGrid").addEventListener("click", (e) => {
   const btn = e.target.closest(".size-btn");
   if (btn) selectSize(btn);
 });
-
-function addCustomToCart() {
-  try {
-    let cart = JSON.parse(localStorage.getItem("croshara_cart") || "[]");
-    const price = sizePrices[selectedSize] || 799;
-    const existing = cart.find(c => c.id === "custom" && c.selectedSize === selectedSize && c.bodyColor === currentBodyColor);
-    if (existing) {
-      existing.qty += 1;
-    } else {
-      cart.push({
-        id: "custom",
-        name: `Custom ${selectedSize} Booties`,
-        price,
-        qty: 1,
-        selectedSize,
-        selectedColor: COLORS.find(c => c.hex === currentBodyColor)?.name || "Custom",
-        bodyColor: currentBodyColor,
-        accentColor: currentAccentColor,
-      });
-    }
-    localStorage.setItem("croshara_cart", JSON.stringify(cart));
-    const notif = document.getElementById("notif");
-    notif.textContent = `✅ Custom ${selectedSize} added to cart!`;
-    notif.classList.add("show");
-    setTimeout(() => notif.classList.remove("show"), 2500);
-    if (typeof updateCartUI === "function") updateCartUI();
-  } catch (e) { console.error(e); }
-}
 
 function recommendSize() {
   const age = document.getElementById("recAge").value;
