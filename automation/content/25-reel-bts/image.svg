@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1080 1080" width="1080" height="1080">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#FDF6F0"/>
+      <stop offset="100%" stop-color="#F7EDE1"/>
+    </linearGradient>
+    <linearGradient id="reelOverlay" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#1a1a2e" stop-opacity="0"/>
+      <stop offset="100%" stop-color="#1a1a2e" stop-opacity="0.85"/>
+    </linearGradient>
+    <filter id="shadow">
+      <feDropShadow dx="0" dy="3" stdDeviation="6" flood-color="#1a1a2e" flood-opacity="0.1"/>
+    </filter>
+  </defs>
+  <rect width="1080" height="1080" fill="url(#bg)"/>
+  <rect x="190" y="160" width="700" height="600" rx="40" fill="#1a1a2e" opacity="0.04"/>
+  <rect x="190" y="160" width="700" height="600" rx="40" fill="none" stroke="#E8A0B4" stroke-width="1" opacity="0.15"/>
+  <rect x="80" y="40" width="300" height="48" rx="24" fill="#E8A0B4" opacity="0.12"/>
+  <text x="100" y="71" font-family="Georgia, serif" font-size="28" font-weight="700" fill="#1a1a2e" letter-spacing="3">CROSHARA</text>
+  <text x="380" y="71" font-family="Arial, sans-serif" font-size="14" fill="#E8A0B4" letter-spacing="1">BTS</text>
+  <rect x="80" y="90" width="60" height="3" rx="1.5" fill="#E8A0B4"/>
+  <g filter="url(#shadow)">
+    <rect x="240" y="200" width="600" height="500" rx="30" fill="white" opacity="0.8"/>
+  </g>
+  <circle cx="440" cy="370" r="70" fill="#FDF6F0"/>
+  <circle cx="440" cy="370" r="70" fill="none" stroke="#E8A0B4" stroke-width="2"/>
+  <circle cx="440" cy="370" r="45" fill="#E8A0B4" opacity="0.12"/>
+  <line x1="440" y1="310" x2="440" y2="430" stroke="#E8A0B4" stroke-width="3" stroke-linecap="round" opacity="0.4"/>
+  <line x1="380" y1="370" x2="500" y2="370" stroke="#E8A0B4" stroke-width="3" stroke-linecap="round" opacity="0.4"/>
+  <circle cx="640" cy="370" r="70" fill="#FDF6F0"/>
+  <circle cx="640" cy="370" r="70" fill="none" stroke="#E8A0B4" stroke-width="2"/>
+  <circle cx="640" cy="370" r="45" fill="#E8A0B4" opacity="0.12"/>
+  <path d="M620 350 Q640 340 650 360 Q660 380 670 350" fill="none" stroke="#E8A0B4" stroke-width="3" stroke-linecap="round"/>
+  <path d="M615 380 Q640 375 650 385" fill="none" stroke="#E8A0B4" stroke-width="2" stroke-linecap="round"/>
+  <rect x="530" y="320" width="6" height="30" rx="3" fill="#E8A0B4" opacity="0.3"/>
+  <rect x="530" y="365" width="6" height="30" rx="3" fill="#E8A0B4" opacity="0.3"/>
+  <rect x="530" y="410" width="6" height="30" rx="3" fill="#E8A0B4" opacity="0.3"/>
+  <text x="540" y="480" font-family="Georgia, serif" font-size="36" font-weight="700" fill="#1a1a2e" text-anchor="middle" letter-spacing="2">Behind the Scenes</text>
+  <rect x="420" y="510" width="240" height="3" rx="1.5" fill="#E8A0B4" opacity="0.4"/>
+  <text x="540" y="550" font-family="Arial, sans-serif" font-size="18" fill="#1a1a2e" text-anchor="middle" opacity="0.6" letter-spacing="1">See how we craft each pair with love</text>
+  <rect x="370" y="590" width="340" height="55" rx="27" fill="#1a1a2e"/>
+  <text x="540" y="625" font-family="Arial, sans-serif" font-size="18" font-weight="700" fill="white" text-anchor="middle" letter-spacing="3">WATCH NOW</text>
+  <circle cx="540" cy="617" r="18" fill="none" stroke="white" stroke-width="2" opacity="0.5"/>
+  <polygon points="535,607 535,627 550,617" fill="white" opacity="0.6"/>
+  <rect x="300" y="680" width="480" height="40" rx="20" fill="#E8A0B4" opacity="0.08"/>
+  <text x="540" y="706" font-family="Arial, sans-serif" font-size="14" fill="#1a1a2e" text-anchor="middle" opacity="0.5">🎥 New reel every week · Follow for more</text>
+  <rect x="80" y="1020" width="920" height="2" fill="#E8A0B4" opacity="0.3"/>
+  <text x="540" y="1045" font-family="Arial, sans-serif" font-size="11" fill="#1a1a2e" opacity="0.3" text-anchor="middle" letter-spacing="2">CROSHARA · INDIA'S FIRST BAREFOOT-FRIENDLY HANDMADE BABY SHOES</text>
+</svg>

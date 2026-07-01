@@ -1,0 +1,58 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1080 1080" width="1080" height="1080">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#FDF6F0"/>
+      <stop offset="100%" stop-color="#F5E6D3"/>
+    </linearGradient>
+    <linearGradient id="warmBtn" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#E8A0B4"/>
+      <stop offset="100%" stop-color="#D4849A"/>
+    </linearGradient>
+    <filter id="shadow">
+      <feDropShadow dx="0" dy="4" stdDeviation="8" flood-color="#1a1a2e" flood-opacity="0.08"/>
+    </filter>
+  </defs>
+  <rect width="1080" height="1080" fill="url(#bg)"/>
+  <circle cx="150" cy="150" r="200" fill="#E8A0B4" opacity="0.05"/>
+  <circle cx="930" cy="930" r="220" fill="#E8A0B4" opacity="0.04"/>
+  <rect x="80" y="40" width="300" height="48" rx="24" fill="#E8A0B4" opacity="0.12"/>
+  <text x="100" y="71" font-family="Georgia, serif" font-size="28" font-weight="700" fill="#1a1a2e" letter-spacing="3">CROSHARA</text>
+  <text x="380" y="71" font-family="Arial, sans-serif" font-size="14" fill="#E8A0B4" letter-spacing="1">CRAFT</text>
+  <rect x="80" y="90" width="60" height="3" rx="1.5" fill="#E8A0B4"/>
+  <g filter="url(#shadow)">
+    <rect x="190" y="180" width="700" height="400" rx="30" fill="white" opacity="0.85"/>
+    <rect x="190" y="180" width="700" height="400" rx="30" fill="none" stroke="#E8A0B4" stroke-width="1" opacity="0.15"/>
+    <circle cx="380" cy="350" r="65" fill="#FDF6F0"/>
+    <circle cx="380" cy="350" r="65" fill="none" stroke="#E8A0B4" stroke-width="2"/>
+    <circle cx="380" cy="350" r="40" fill="#E8A0B4" opacity="0.12"/>
+    <path d="M355 330 Q370 320 380 335 Q390 350 405 330" fill="none" stroke="#E8A0B4" stroke-width="3" stroke-linecap="round"/>
+    <circle cx="370" cy="340" r="4" fill="#1a1a2e" opacity="0.4"/>
+    <circle cx="390" cy="340" r="4" fill="#1a1a2e" opacity="0.4"/>
+    <circle cx="540" cy="350" r="65" fill="#FDF6F0"/>
+    <circle cx="540" cy="350" r="65" fill="none" stroke="#E8A0B4" stroke-width="2"/>
+    <circle cx="540" cy="350" r="40" fill="#E8A0B4" opacity="0.12"/>
+    <path d="M520 335 Q535 330 540 345 Q545 360 560 335" fill="none" stroke="#E8A0B4" stroke-width="3" stroke-linecap="round"/>
+    <circle cx="533" cy="340" r="4" fill="#1a1a2e" opacity="0.4"/>
+    <circle cx="548" cy="340" r="4" fill="#1a1a2e" opacity="0.4"/>
+    <circle cx="700" cy="350" r="65" fill="#FDF6F0"/>
+    <circle cx="700" cy="350" r="65" fill="none" stroke="#E8A0B4" stroke-width="2"/>
+    <circle cx="700" cy="350" r="40" fill="#E8A0B4" opacity="0.12"/>
+    <path d="M678 335 Q693 328 700 345 Q707 362 722 335" fill="none" stroke="#E8A0B4" stroke-width="3" stroke-linecap="round"/>
+    <circle cx="692" cy="340" r="4" fill="#1a1a2e" opacity="0.4"/>
+    <circle cx="708" cy="340" r="4" fill="#1a1a2e" opacity="0.4"/>
+    <path d="M300 430 Q320 415 340 430 Q360 445 380 430 Q400 415 420 430 Q440 445 460 430" fill="none" stroke="#E8A0B4" stroke-width="2" opacity="0.3" stroke-linecap="round"/>
+    <path d="M480 430 Q500 415 520 430 Q540 445 560 430 Q580 415 600 430 Q620 445 640 430" fill="none" stroke="#E8A0B4" stroke-width="2" opacity="0.3" stroke-linecap="round"/>
+    <path d="M660 430 Q680 415 700 430 Q720 445 740 430 Q760 415 780 430" fill="none" stroke="#E8A0B4" stroke-width="2" opacity="0.3" stroke-linecap="round"/>
+  </g>
+  <text x="540" y="490" font-family="Georgia, serif" font-size="18" fill="#E8A0B4" text-anchor="middle" letter-spacing="2">PROUDLY HANDMADE</text>
+  <text x="540" y="550" font-family="Georgia, serif" font-size="44" font-weight="700" fill="#1a1a2e" text-anchor="middle" letter-spacing="1">Made by</text>
+  <text x="540" y="605" font-family="Georgia, serif" font-size="44" font-weight="700" fill="#1a1a2e" text-anchor="middle" letter-spacing="1">Indian Artisans</text>
+  <rect x="290" y="640" width="500" height="55" rx="27" fill="url(#warmBtn)"/>
+  <text x="540" y="675" font-family="Arial, sans-serif" font-size="18" font-weight="700" fill="white" text-anchor="middle" letter-spacing="3">OUR STORY</text>
+  <rect x="140" y="730" width="800" height="100" rx="20" fill="white" opacity="0.7"/>
+  <rect x="140" y="730" width="800" height="100" rx="20" fill="none" stroke="#E8A0B4" stroke-width="1" opacity="0.2"/>
+  <text x="540" y="765" font-family="Georgia, serif" font-size="18" font-weight="700" fill="#1a1a2e" text-anchor="middle">Empowering Artisans Across India</text>
+  <text x="540" y="795" font-family="Arial, sans-serif" font-size="14" fill="#1a1a2e" text-anchor="middle" opacity="0.6">Each pair supports traditional craftsmanship & fair wages</text>
+  <rect x="80" y="1020" width="920" height="2" fill="#E8A0B4" opacity="0.3"/>
+  <text x="540" y="1045" font-family="Arial, sans-serif" font-size="11" fill="#1a1a2e" opacity="0.3" text-anchor="middle" letter-spacing="2">CROSHARA · INDIA'S FIRST BAREFOOT-FRIENDLY HANDMADE BABY SHOES</text>
+</svg>

@@ -1,0 +1,8 @@
+node_modules/
+.env
+__pycache__/
+*.pyc
+automation/session.json
+automation/config.json
+automation/playwright_auth.json
+site/data/*.json

@@ -1,0 +1,61 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1080 1080" width="1080" height="1080">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#FDF6F0"/>
+      <stop offset="100%" stop-color="#F5E6D3"/>
+    </linearGradient>
+    <linearGradient id="pinkBtn" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#E8A0B4"/>
+      <stop offset="100%" stop-color="#D4849A"/>
+    </linearGradient>
+    <filter id="shadow">
+      <feDropShadow dx="0" dy="4" stdDeviation="8" flood-color="#1a1a2e" flood-opacity="0.08"/>
+    </filter>
+  </defs>
+  <rect width="1080" height="1080" fill="url(#bg)"/>
+  <circle cx="200" cy="900" r="280" fill="#E8A0B4" opacity="0.05"/>
+  <circle cx="880" cy="180" r="260" fill="#E8A0B4" opacity="0.04"/>
+  <rect x="80" y="40" width="300" height="48" rx="24" fill="#E8A0B4" opacity="0.12"/>
+  <text x="100" y="71" font-family="Georgia, serif" font-size="28" font-weight="700" fill="#1a1a2e" letter-spacing="3">CROSHARA</text>
+  <text x="380" y="71" font-family="Arial, sans-serif" font-size="14" fill="#E8A0B4" letter-spacing="1">SIZING</text>
+  <rect x="80" y="90" width="60" height="3" rx="1.5" fill="#E8A0B4"/>
+  <text x="540" y="210" font-family="Georgia, serif" font-size="44" font-weight="700" fill="#1a1a2e" text-anchor="middle" letter-spacing="2">Sizing Guide</text>
+  <text x="540" y="250" font-family="Arial, sans-serif" font-size="18" fill="#1a1a2e" text-anchor="middle" opacity="0.6" letter-spacing="1">Find the perfect fit for your little one</text>
+  <g filter="url(#shadow)">
+    <rect x="340" y="300" width="400" height="250" rx="25" fill="white" opacity="0.9"/>
+    <rect x="340" y="300" width="400" height="250" rx="25" fill="none" stroke="#E8A0B4" stroke-width="1" opacity="0.2"/>
+    <ellipse cx="540" cy="420" rx="80" ry="45" fill="none" stroke="#E8A0B4" stroke-width="2" opacity="0.3"/>
+    <ellipse cx="540" cy="420" rx="80" ry="45" fill="#E8A0B4" opacity="0.04"/>
+    <line x1="540" y1="375" x2="540" y2="465" stroke="#E8A0B4" stroke-width="1.5" opacity="0.3"/>
+    <line x1="460" y1="420" x2="620" y2="420" stroke="#E8A0B4" stroke-width="1.5" opacity="0.3"/>
+    <circle cx="540" cy="420" r="4" fill="#E8A0B4"/>
+    <circle cx="500" cy="400" r="3" fill="#E8A0B4" opacity="0.4"/>
+    <circle cx="580" cy="400" r="3" fill="#E8A0B4" opacity="0.4"/>
+    <circle cx="500" cy="440" r="3" fill="#E8A0B4" opacity="0.4"/>
+    <circle cx="580" cy="440" r="3" fill="#E8A0B4" opacity="0.4"/>
+    <text x="540" y="500" font-family="Arial, sans-serif" font-size="14" fill="#1a1a2e" text-anchor="middle" opacity="0.4">Foot outline for reference</text>
+    <text x="470" y="525" font-family="Arial, sans-serif" font-size="11" fill="#E8A0B4" text-anchor="middle" letter-spacing="1">HEEL</text>
+    <text x="610" y="525" font-family="Arial, sans-serif" font-size="11" fill="#E8A0B4" text-anchor="middle" letter-spacing="1">TOE</text>
+  </g>
+  <rect x="140" y="590" width="800" height="130" rx="20" fill="white" opacity="0.85"/>
+  <rect x="140" y="590" width="800" height="130" rx="20" fill="none" stroke="#E8A0B4" stroke-width="1" opacity="0.2"/>
+  <text x="540" y="625" font-family="Arial, sans-serif" font-size="16" font-weight="700" fill="#1a1a2e" text-anchor="middle" letter-spacing="2">SIZE CHART</text>
+  <rect x="180" y="645" width="150" height="55" rx="10" fill="#FDF6F0"/>
+  <text x="255" y="668" font-family="Arial, sans-serif" font-size="14" font-weight="700" fill="#1a1a2e" text-anchor="middle">Size</text>
+  <text x="255" y="688" font-family="Georgia, serif" font-size="18" font-weight="700" fill="#E8A0B4" text-anchor="middle">0-6 M</text>
+  <rect x="350" y="645" width="150" height="55" rx="10" fill="#FDF6F0"/>
+  <text x="425" y="668" font-family="Arial, sans-serif" font-size="14" font-weight="700" fill="#1a1a2e" text-anchor="middle">Size</text>
+  <text x="425" y="688" font-family="Georgia, serif" font-size="18" font-weight="700" fill="#E8A0B4" text-anchor="middle">6-12 M</text>
+  <rect x="520" y="645" width="150" height="55" rx="10" fill="#FDF6F0"/>
+  <text x="595" y="668" font-family="Arial, sans-serif" font-size="14" font-weight="700" fill="#1a1a2e" text-anchor="middle">Size</text>
+  <text x="595" y="688" font-family="Georgia, serif" font-size="18" font-weight="700" fill="#E8A0B4" text-anchor="middle">12-18 M</text>
+  <rect x="690" y="645" width="150" height="55" rx="10" fill="#FDF6F0"/>
+  <text x="765" y="668" font-family="Arial, sans-serif" font-size="14" font-weight="700" fill="#1a1a2e" text-anchor="middle">Size</text>
+  <text x="765" y="688" font-family="Georgia, serif" font-size="18" font-weight="700" fill="#E8A0B4" text-anchor="middle">18-24 M</text>
+  <rect x="290" y="750" width="500" height="55" rx="27" fill="url(#pinkBtn)"/>
+  <text x="540" y="785" font-family="Arial, sans-serif" font-size="18" font-weight="700" fill="white" text-anchor="middle" letter-spacing="3">FIND YOUR SIZE</text>
+  <rect x="200" y="830" width="680" height="40" rx="20" fill="#E8A0B4" opacity="0.08"/>
+  <text x="540" y="855" font-family="Arial, sans-serif" font-size="13" fill="#1a1a2e" text-anchor="middle" opacity="0.5">📏 Measure foot length from heel to longest toe</text>
+  <rect x="80" y="1020" width="920" height="2" fill="#E8A0B4" opacity="0.3"/>
+  <text x="540" y="1045" font-family="Arial, sans-serif" font-size="11" fill="#1a1a2e" opacity="0.3" text-anchor="middle" letter-spacing="2">CROSHARA · INDIA'S FIRST BAREFOOT-FRIENDLY HANDMADE BABY SHOES</text>
+</svg>

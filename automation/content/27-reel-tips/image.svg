@@ -1,0 +1,54 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1080 1080" width="1080" height="1080">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#FDF6F0"/>
+      <stop offset="100%" stop-color="#F5E6D3"/>
+    </linearGradient>
+    <linearGradient id="pinkBtn" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#E8A0B4"/>
+      <stop offset="100%" stop-color="#D4849A"/>
+    </linearGradient>
+    <filter id="shadow">
+      <feDropShadow dx="0" dy="4" stdDeviation="8" flood-color="#1a1a2e" flood-opacity="0.08"/>
+    </filter>
+  </defs>
+  <rect width="1080" height="1080" fill="url(#bg)"/>
+  <circle cx="850" cy="150" r="300" fill="#E8A0B4" opacity="0.04"/>
+  <rect x="80" y="40" width="300" height="48" rx="24" fill="#E8A0B4" opacity="0.12"/>
+  <text x="100" y="71" font-family="Georgia, serif" font-size="28" font-weight="700" fill="#1a1a2e" letter-spacing="3">CROSHARA</text>
+  <text x="380" y="71" font-family="Arial, sans-serif" font-size="14" fill="#E8A0B4" letter-spacing="1">TIPS</text>
+  <rect x="80" y="90" width="60" height="3" rx="1.5" fill="#E8A0B4"/>
+  <g filter="url(#shadow)">
+    <rect x="140" y="180" width="800" height="580" rx="35" fill="white" opacity="0.9"/>
+    <rect x="140" y="180" width="800" height="580" rx="35" fill="none" stroke="#E8A0B4" stroke-width="1.5" opacity="0.15"/>
+    <circle cx="540" cy="320" r="65" fill="#FDF6F0"/>
+    <circle cx="540" cy="320" r="65" fill="none" stroke="#E8A0B4" stroke-width="2"/>
+    <circle cx="540" cy="320" r="42" fill="#E8A0B4" opacity="0.12"/>
+    <ellipse cx="540" cy="320" rx="18" ry="28" fill="none" stroke="#1a1a2e" stroke-width="2.5" opacity="0.2"/>
+    <circle cx="535" cy="305" r="3" fill="#1a1a2e" opacity="0.3"/>
+    <circle cx="545" cy="305" r="3" fill="#1a1a2e" opacity="0.3"/>
+    <path d="M535 335 Q540 342 545 335" fill="none" stroke="#1a1a2e" stroke-width="1.5" opacity="0.2" stroke-linecap="round"/>
+    <path d="M528 290 Q530 310 528 328" fill="none" stroke="#E8A0B4" stroke-width="2.5" opacity="0.3" stroke-linecap="round"/>
+    <path d="M552 290 Q550 310 552 328" fill="none" stroke="#E8A0B4" stroke-width="2.5" opacity="0.3" stroke-linecap="round"/>
+  </g>
+  <text x="540" y="390" font-family="Georgia, serif" font-size="20" fill="#E8A0B4" text-anchor="middle" letter-spacing="2">MOM TESTED</text>
+  <text x="540" y="450" font-family="Georgia, serif" font-size="42" font-weight="700" fill="#1a1a2e" text-anchor="middle" letter-spacing="2">Actually Stays On!</text>
+  <text x="540" y="500" font-family="Arial, sans-serif" font-size="18" fill="#1a1a2e" text-anchor="middle" opacity="0.6">No more lost socks · Elastic comfort grip</text>
+  <rect x="200" y="540" width="680" height="70" rx="18" fill="#FDF6F0"/>
+  <rect x="200" y="540" width="680" height="70" rx="18" fill="none" stroke="#E8A0B4" stroke-width="1" opacity="0.3"/>
+  <circle cx="250" cy="575" r="14" fill="#E8A0B4"/>
+  <text x="250" y="579" font-family="Arial, sans-serif" font-size="12" font-weight="700" fill="white" text-anchor="middle">✓</text>
+  <text x="280" y="570" font-family="Arial, sans-serif" font-size="16" fill="#1a1a2e" font-weight="700">Elastic Ankle Grip</text>
+  <text x="280" y="592" font-family="Arial, sans-serif" font-size="13" fill="#1a1a2e" opacity="0.5">Snug fit, no slipping</text>
+  <line x1="530" y1="550" x2="530" y2="600" stroke="#E8A0B4" stroke-width="1" opacity="0.3"/>
+  <circle cx="600" cy="575" r="14" fill="#E8A0B4"/>
+  <text x="600" y="579" font-family="Arial, sans-serif" font-size="12" font-weight="700" fill="white" text-anchor="middle">✓</text>
+  <text x="630" y="570" font-family="Arial, sans-serif" font-size="16" fill="#1a1a2e" font-weight="700">Soft Breathable Fabric</text>
+  <text x="630" y="592" font-family="Arial, sans-serif" font-size="13" fill="#1a1a2e" opacity="0.5">Gentle on delicate skin</text>
+  <rect x="290" y="650" width="500" height="55" rx="27" fill="url(#pinkBtn)"/>
+  <text x="540" y="685" font-family="Arial, sans-serif" font-size="18" font-weight="700" fill="white" text-anchor="middle" letter-spacing="3">TRY IT YOURSELF</text>
+  <rect x="200" y="730" width="680" height="40" rx="20" fill="#E8A0B4" opacity="0.06"/>
+  <text x="540" y="756" font-family="Arial, sans-serif" font-size="13" fill="#1a1a2e" text-anchor="middle" opacity="0.5">👶 Designed for crawlers & early walkers</text>
+  <rect x="80" y="1020" width="920" height="2" fill="#E8A0B4" opacity="0.3"/>
+  <text x="540" y="1045" font-family="Arial, sans-serif" font-size="11" fill="#1a1a2e" opacity="0.3" text-anchor="middle" letter-spacing="2">CROSHARA · INDIA'S FIRST BAREFOOT-FRIENDLY HANDMADE BABY SHOES</text>
+</svg>

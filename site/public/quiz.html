@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Color Quiz – CROSHARA Baby Shoes</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Inter', sans-serif;
+      background: #FDF6F0;
+      color: #1a1a2e;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 40px 20px;
+    }
+    .container {
+      max-width: 720px;
+      width: 100%;
+    }
+
+    /* –– START SCREEN –– */
+    #startScreen {
+      text-align: center;
+      padding: 60px 20px;
+    }
+    #startScreen h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.8rem;
+      font-weight: 600;
+      color: #1a1a2e;
+      margin-bottom: 12px;
+    }
+    #startScreen p {
+      font-size: 1.05rem;
+      color: #666;
+      font-weight: 300;
+      margin-bottom: 36px;
+    }
+    .btn-primary {
+      display: inline-block;
+      background: linear-gradient(135deg, #E8A0B4, #D4809A);
+      color: #fff;
+      border: none;
+      padding: 16px 48px;
+      border-radius: 50px;
+      font-size: 1.05rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s;
+      font-family: 'Inter', sans-serif;
+    }
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(232,160,180,0.4);
+    }
+
+    /* –– QUIZ SCREEN –– */
+    .quiz-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 32px;
+    }
+    .quiz-header h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.4rem;
+      font-weight: 500;
+    }
+    .progress-text {
+      font-size: 0.9rem;
+      color: #999;
+      font-weight: 500;
+    }
+    .progress-bar {
+      width: 100%;
+      height: 6px;
+      background: #eee;
+      border-radius: 10px;
+      margin-bottom: 36px;
+      overflow: hidden;
+    }
+    .progress-fill {
+      height: 100%;
+      background: linear-gradient(90deg, #E8A0B4, #D4809A);
+      border-radius: 10px;
+      transition: width 0.5s ease;
+    }
+
+    .question-card {
+      background: #fff;
+      border-radius: 24px;
+      padding: 40px;
+      box-shadow: 0 4px 24px rgba(26,26,46,0.06);
+      margin-bottom: 32px;
+    }
+    .question-card h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.4rem;
+      font-weight: 500;
+      color: #1a1a2e;
+      margin-bottom: 24px;
+    }
+    .options {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+    }
+    .option-btn {
+      background: #FDF6F0;
+      border: 1.5px solid #eee;
+      border-radius: 16px;
+      padding: 16px 18px;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: all 0.25s;
+      text-align: center;
+      font-family: 'Inter', sans-serif;
+      color: #1a1a2e;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+    .option-btn .emoji { font-size: 1.3rem; }
+    .option-btn:hover {
+      border-color: #E8A0B4;
+      background: #fff;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 14px rgba(232,160,180,0.15);
+    }
+    .option-btn.selected {
+      border-color: #E8A0B4;
+      background: linear-gradient(135deg, rgba(232,160,180,0.12), rgba(212,128,154,0.08));
+      box-shadow: 0 4px 14px rgba(232,160,180,0.2);
+    }
+    .option-btn .check {
+      display: none;
+      color: #E8A0B4;
+      font-weight: 600;
+    }
+    .option-btn.selected .check { display: inline; }
+
+    .btn-nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .btn-next {
+      background: linear-gradient(135deg, #E8A0B4, #D4809A);
+      color: #fff;
+      border: none;
+      padding: 14px 40px;
+      border-radius: 50px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s;
+      font-family: 'Inter', sans-serif;
+      margin-left: auto;
+    }
+    .btn-next:disabled {
+      opacity: 0.4;
+      cursor: not-allowed;
+    }
+    .btn-next:hover:not(:disabled) {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(232,160,180,0.4);
+    }
+
+    /* –– RESULT SCREEN –– */
+    #resultScreen {
+      display: none;
+      text-align: center;
+      padding: 40px 20px;
+    }
+    .result-reveal {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: all 0.8s ease;
+    }
+    .result-reveal.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .result-swatch {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      margin: 0 auto 20px;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.10);
+    }
+    #resultScreen h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.2rem;
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+    #resultScreen .color-name {
+      font-size: 1.1rem;
+      font-weight: 500;
+      color: #E8A0B4;
+      margin-bottom: 14px;
+    }
+    #resultScreen .desc {
+      font-size: 1rem;
+      color: #555;
+      line-height: 1.7;
+      max-width: 480px;
+      margin: 0 auto 32px;
+    }
+    .btn-retake {
+      background: transparent;
+      color: #1a1a2e;
+      border: 1.5px solid #ddd;
+      padding: 12px 32px;
+      border-radius: 50px;
+      font-size: 0.95rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.3s;
+      font-family: 'Inter', sans-serif;
+      margin-right: 12px;
+    }
+    .btn-retake:hover { border-color: #E8A0B4; }
+    .btn-share {
+      background: linear-gradient(135deg, #E8A0B4, #D4809A);
+      color: #fff;
+      border: none;
+      padding: 12px 32px;
+      border-radius: 50px;
+      font-size: 0.95rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s;
+      font-family: 'Inter', sans-serif;
+    }
+    .btn-share:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(232,160,180,0.4);
+    }
+
+    .toast-share {
+      margin-top: 16px;
+      padding: 10px 18px;
+      border-radius: 10px;
+      background: #e6f7e6;
+      color: #1f7a1f;
+      font-size: 0.85rem;
+      display: none;
+    }
+
+    @media (max-width: 600px) {
+      #startScreen h1 { font-size: 2rem; }
+      .options { grid-template-columns: 1fr; }
+      .question-card { padding: 24px 20px; }
+      .question-card h3 { font-size: 1.15rem; }
+      #resultScreen h2 { font-size: 1.7rem; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+
+    <!-- START -->
+    <div id="startScreen">
+      <h1>What Color Fits Your Baby?</h1>
+      <p>Answer 6 fun questions and discover the perfect CROSHARA color for your little one.</p>
+      <button class="btn-primary" onclick="startQuiz()">Start the Quiz</button>
+    </div>
+
+    <!-- QUIZ -->
+    <div id="quizScreen" style="display:none;">
+      <div class="quiz-header">
+        <h2>Color Quiz</h2>
+        <span class="progress-text" id="progressText">1 / 6</span>
+      </div>
+      <div class="progress-bar">
+        <div class="progress-fill" id="progressFill" style="width:16.66%"></div>
+      </div>
+      <div class="question-card" id="questionCard"></div>
+      <div class="btn-nav">
+        <button class="btn-next" id="btnNext" disabled onclick="nextQuestion()">Next →</button>
+      </div>
+    </div>
+
+    <!-- RESULT -->
+    <div id="resultScreen">
+      <div class="result-reveal" id="resultReveal">
+        <div class="result-swatch" id="resultSwatch"></div>
+        <h2>Your Color Is</h2>
+        <div class="color-name" id="resultColorName"></div>
+        <div class="desc" id="resultDesc"></div>
+        <div>
+          <button class="btn-retake" onclick="resetQuiz()">Retake Quiz</button>
+          <button class="btn-share" onclick="shareResult()">Share Result</button>
+        </div>
+        <div class="toast-share" id="toastShare">Link copied to clipboard!</div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- FLOATING DM BUTTON -->
+  <a href="https://www.instagram.com/crosharahandmade" target="_blank" rel="noopener" class="float-dm" style="position:fixed;bottom:24px;right:24px;z-index:9999;display:flex;align-items:center;gap:10px;background:linear-gradient(135deg,#E8A0B4,#D4809A);color:#fff;padding:14px 24px;border-radius:50px;text-decoration:none;font-weight:600;font-size:0.95rem;box-shadow:0 8px 32px rgba(232,160,180,0.4);transition:all 0.4s ease;animation:float-dm 3s ease-in-out infinite;">
+    <span style="font-size:1.4rem">📩</span>
+    <span>DM to Order</span>
+  </a>
+  <style>@keyframes float-dm{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}.float-dm:hover{transform:translateY(-4px) scale(1.05);box-shadow:0 12px 40px rgba(232,160,180,0.5)}@media(max-width:576px){.float-dm span:last-child{display:none}}</style>
+
+  <script>
+    const questions = [
+      {
+        q: "What's your baby's vibe?",
+        options: [
+          { label: 'Sweet & Calm', emoji: '🌸', tags: ['sweet','calm'] },
+          { label: 'Nature Lover', emoji: '🌿', tags: ['nature'] },
+          { label: 'Playful & Bright', emoji: '💫', tags: ['playful','bright'] },
+          { label: 'Bold & Confident', emoji: '👑', tags: ['bold','confident'] }
+        ]
+      },
+      {
+        q: 'Which season was baby born?',
+        options: [
+          { label: 'Winter', emoji: '❄️', tags: ['winter'] },
+          { label: 'Spring', emoji: '🌸', tags: ['spring'] },
+          { label: 'Summer', emoji: '☀️', tags: ['summer'] },
+          { label: 'Fall', emoji: '🍂', tags: ['fall'] }
+        ]
+      },
+      {
+        q: 'Pick a nursery theme:',
+        options: [
+          { label: 'Stars & Moon', emoji: '🌙', tags: ['stars','moon'] },
+          { label: 'Botanical', emoji: '🌿', tags: ['botanical','nature'] },
+          { label: 'Minimalist', emoji: '🤍', tags: ['minimalist'] },
+          { label: 'Rainbow', emoji: '🌈', tags: ['rainbow','bright'] }
+        ]
+      },
+      {
+        q: "Baby's eye color?",
+        options: [
+          { label: 'Brown', emoji: '🟤', tags: ['brown'] },
+          { label: 'Dark', emoji: '⚫', tags: ['dark'] },
+          { label: 'Hazel', emoji: '🟢', tags: ['hazel'] },
+          { label: 'Blue/Grey', emoji: '🔵', tags: ['blue','grey'] }
+        ]
+      },
+      {
+        q: 'Perfect weekend activity?',
+        options: [
+          { label: 'Cozy at home', emoji: '🏡', tags: ['home','calm'] },
+          { label: 'Park walk', emoji: '🌳', tags: ['park','nature'] },
+          { label: 'Shopping', emoji: '🛍️', tags: ['shopping','bright'] },
+          { label: 'Photoshoot', emoji: '📸', tags: ['photoshoot','confident'] }
+        ]
+      },
+      {
+        q: 'Gift or for your own baby?',
+        options: [
+          { label: 'Gift', emoji: '🎁', tags: ['gift'] },
+          { label: 'My baby', emoji: '👶', tags: ['mybaby'] },
+          { label: 'Still deciding', emoji: '🤷', tags: ['deciding'] }
+        ]
+      }
+    ];
+
+    const tagScores = {
+      sweet: 0, calm: 0, nature: 0, playful: 0, bright: 0,
+      bold: 0, confident: 0, winter: 0, spring: 0, summer: 0,
+      fall: 0, stars: 0, moon: 0, botanical: 0, minimalist: 0,
+      rainbow: 0, brown: 0, dark: 0, hazel: 0, blue: 0, grey: 0,
+      home: 0, park: 0, shopping: 0, photoshoot: 0, gift: 0,
+      mybaby: 0, deciding: 0
+    };
+
+    const colors = [
+      {
+        name: 'Blush Pink',
+        hex: '#E8A0B4',
+        desc: 'Soft, sweet, and dreamy — just like your little one. Blush Pink is the perfect choice for calm, gentle babies who love cozy snuggles and tender moments. A timeless CROSHARA favorite that pairs beautifully with any wardrobe.',
+        match: function(s) { return (s.sweet + s.calm + s.home + s.gift + s.spring + s.stars + s.moon) >= 3; }
+      },
+      {
+        name: 'Cream',
+        hex: '#FFF8E7',
+        desc: 'Pure, warm, and effortlessly elegant. Cream is for babies who radiate a quiet, natural beauty. It complements any nursery theme and goes with everything — the ultimate versatile shade for your little one.',
+        match: function(s) { return (s.calm + s.home + s.nature + s.gift + s.minimalist + s.winter + s.blue) >= 3; }
+      },
+      {
+        name: 'Navy Blue',
+        hex: '#1a1a2e',
+        desc: 'Bold, confident, and wonderfully rich. Navy Blue is for little trendsetters who make a statement wherever they go. Sophisticated yet adorable, it\'s the color of choice for parents who love sleek style.',
+        match: function(s) { return (s.bold + s.confident + s.summer + s.shopping + s.bright + s.rainbow + s.moon) >= 3; }
+      },
+      {
+        name: 'Walnut Brown',
+        hex: '#8B6F5E',
+        desc: 'Warm, earthy, and beautifully grounded. Walnut Brown is for adventurous, nature-loving babies. It\'s the color of tree trunks, autumn leaves, and cozy evenings — a natural CROSHARA classic.',
+        match: function(s) { return (s.nature + s.fall + s.brown + s.park + s.earth + s.home) >= 3; }
+      },
+      {
+        name: 'Mint Green',
+        hex: '#A8D5BA',
+        desc: 'Fresh, lively, and full of joy. Mint Green is for babies who bring sunshine into every room. It evokes spring meadows, botanical gardens, and the pure delight of a baby\'s first laugh.',
+        match: function(s) { return (s.nature + s.spring + s.botanical + s.park + s.hazel + s.playful + s.bright) >= 3; }
+      },
+      {
+        name: 'Grey',
+        hex: '#B0B0B8',
+        desc: 'Chic, modern, and beautifully understated. Grey is for minimalist families who appreciate clean lines and timeless design. It\'s the perfect neutral that lets your baby\'s personality shine.',
+        match: function(s) { return (s.minimalist + s.fall + s.grey + s.dark + s.deciding + s.winter + s.blue) >= 3; }
+      }
+    ];
+
+    let current = 0;
+    let answers = [];
+
+    function startQuiz() {
+      document.getElementById('startScreen').style.display = 'none';
+      document.getElementById('quizScreen').style.display = 'block';
+      document.getElementById('resultScreen').style.display = 'none';
+      current = 0;
+      answers = [];
+      for (let k in tagScores) tagScores[k] = 0;
+      showQuestion();
+    }
+
+    function showQuestion() {
+      const q = questions[current];
+      const card = document.getElementById('questionCard');
+      const opts = q.options.map((o, i) => {
+        const selected = answers[current] === i ? ' selected' : '';
+        return `<button class="option-btn${selected}" data-index="${i}" onclick="selectOption(${i})">
+          <span class="emoji">${o.emoji}</span> ${o.label}
+          <span class="check"> ✓</span>
+        </button>`;
+      }).join('');
+
+      card.innerHTML = `<h3>${q.q}</h3><div class="options">${opts}</div>`;
+      document.getElementById('progressText').textContent = `${current + 1} / ${questions.length}`;
+      document.getElementById('progressFill').style.width = `${((current + 1) / questions.length) * 100}%`;
+      document.getElementById('btnNext').disabled = answers[current] === undefined;
+    }
+
+    function selectOption(idx) {
+      answers[current] = idx;
+      document.querySelectorAll('.option-btn').forEach((b, i) => {
+        b.classList.toggle('selected', i === idx);
+      });
+      document.getElementById('btnNext').disabled = false;
+    }
+
+    function nextQuestion() {
+      const idx = answers[current];
+      const tags = questions[current].options[idx].tags;
+      tags.forEach(t => { if (tagScores[t] !== undefined) tagScores[t]++; });
+
+      current++;
+      if (current < questions.length) {
+        showQuestion();
+      } else {
+        showResult();
+      }
+    }
+
+    function showResult() {
+      document.getElementById('quizScreen').style.display = 'none';
+      document.getElementById('resultScreen').style.display = 'block';
+
+      let matched = null;
+      for (const c of colors) {
+        if (c.match(tagScores)) { matched = c; break; }
+      }
+      if (!matched) matched = colors[0];
+
+      document.getElementById('resultSwatch').style.background = matched.hex;
+      document.getElementById('resultColorName').textContent = matched.name;
+      document.getElementById('resultDesc').textContent = matched.desc;
+
+      setTimeout(() => {
+        document.getElementById('resultReveal').classList.add('show');
+      }, 100);
+    }
+
+    function shareResult() {
+      const name = document.getElementById('resultColorName').textContent;
+      const url = window.location.href;
+      const text = `I found the perfect CROSHARA color for my baby: ${name}! ✨ Take the quiz to find yours: ${url}`;
+      if (navigator.share) {
+        navigator.share({ title: 'CROSHARA Color Quiz', text }).catch(() => {});
+      } else {
+        navigator.clipboard.writeText(`${name} — ${url}`).then(() => {
+          const toast = document.getElementById('toastShare');
+          toast.style.display = 'block';
+          setTimeout(() => toast.style.display = 'none', 3000);
+        });
+      }
+    }
+
+    function resetQuiz() {
+      document.getElementById('resultReveal').classList.remove('show');
+      document.getElementById('resultScreen').style.display = 'none';
+      startQuiz();
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1080 1080" width="1080" height="1080">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#FDF6F0"/>
+      <stop offset="100%" stop-color="#F8EFE2"/>
+    </linearGradient>
+    <linearGradient id="sparkle" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#E8A0B4" stop-opacity="0.15"/>
+      <stop offset="100%" stop-color="#E8A0B4" stop-opacity="0"/>
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <rect width="1080" height="1080" fill="url(#bg)"/>
+  <circle cx="540" cy="540" r="450" fill="url(#sparkle)"/>
+  <circle cx="150" cy="150" r="120" fill="#E8A0B4" opacity="0.06"/>
+  <circle cx="930" cy="930" r="140" fill="#E8A0B4" opacity="0.05"/>
+  <rect x="80" y="40" width="300" height="48" rx="24" fill="#E8A0B4" opacity="0.12"/>
+  <text x="100" y="71" font-family="Georgia, serif" font-size="28" font-weight="700" fill="#1a1a2e" letter-spacing="3">CROSHARA</text>
+  <text x="380" y="71" font-family="Arial, sans-serif" font-size="14" fill="#E8A0B4" letter-spacing="1">SNEAK PEEK</text>
+  <rect x="80" y="90" width="60" height="3" rx="1.5" fill="#E8A0B4"/>
+  <text x="540" y="300" font-family="Georgia, serif" font-size="56" font-weight="700" fill="#1a1a2e" text-anchor="middle" letter-spacing="3">Coming Soon</text>
+  <rect x="380" y="335" width="320" height="3" rx="1.5" fill="#E8A0B4" opacity="0.4"/>
+  <text x="540" y="380" font-family="Arial, sans-serif" font-size="20" fill="#1a1a2e" text-anchor="middle" opacity="0.6" letter-spacing="3">NEW COLLECTION</text>
+  <g filter="url(#glow)">
+    <circle cx="300" cy="500" r="55" fill="#F5D5E0"/>
+    <circle cx="300" cy="500" r="55" fill="none" stroke="#E8A0B4" stroke-width="2" opacity="0.4"/>
+    <circle cx="420" cy="500" r="55" fill="#E8D5F5"/>
+    <circle cx="420" cy="500" r="55" fill="none" stroke="#C9A8E8" stroke-width="2" opacity="0.4"/>
+    <circle cx="540" cy="500" r="55" fill="#D5F5E0"/>
+    <circle cx="540" cy="500" r="55" fill="none" stroke="#8ED4A8" stroke-width="2" opacity="0.4"/>
+    <circle cx="660" cy="500" r="55" fill="#D5E8F5"/>
+    <circle cx="660" cy="500" r="55" fill="none" stroke="#8EB8D4" stroke-width="2" opacity="0.4"/>
+    <circle cx="780" cy="500" r="55" fill="#F5ECD5"/>
+    <circle cx="780" cy="500" r="55" fill="none" stroke="#D4C48E" stroke-width="2" opacity="0.4"/>
+  </g>
+  <text x="300" y="585" font-family="Arial, sans-serif" font-size="14" fill="#1a1a2e" text-anchor="middle" opacity="0.6">Blush</text>
+  <text x="420" y="585" font-family="Arial, sans-serif" font-size="14" fill="#1a1a2e" text-anchor="middle" opacity="0.6">Lavender</text>
+  <text x="540" y="585" font-family="Arial, sans-serif" font-size="14" fill="#1a1a2e" text-anchor="middle" opacity="0.6">Mint</text>
+  <text x="660" y="585" font-family="Arial, sans-serif" font-size="14" fill="#1a1a2e" text-anchor="middle" opacity="0.6">Sky</text>
+  <text x="780" y="585" font-family="Arial, sans-serif" font-size="14" fill="#1a1a2e" text-anchor="middle" opacity="0.6">Sand</text>
+  <rect x="340" y="650" width="400" height="60" rx="30" fill="none" stroke="#E8A0B4" stroke-width="2"/>
+  <text x="540" y="688" font-family="Arial, sans-serif" font-size="18" font-weight="700" fill="#E8A0B4" text-anchor="middle" letter-spacing="3">NOTIFY ME</text>
+  <rect x="200" y="750" width="680" height="100" rx="20" fill="white" opacity="0.6"/>
+  <rect x="200" y="750" width="680" height="100" rx="20" fill="none" stroke="#E8A0B4" stroke-width="1" opacity="0.2"/>
+  <text x="540" y="790" font-family="Georgia, serif" font-size="22" font-weight="700" fill="#1a1a2e" text-anchor="middle">Pastel Dream Collection</text>
+  <text x="540" y="820" font-family="Arial, sans-serif" font-size="16" fill="#1a1a2e" text-anchor="middle" opacity="0.5">Launching this season · Handmade with love</text>
+  <rect x="80" y="1020" width="920" height="2" fill="#E8A0B4" opacity="0.3"/>
+  <text x="540" y="1045" font-family="Arial, sans-serif" font-size="11" fill="#1a1a2e" opacity="0.3" text-anchor="middle" letter-spacing="2">CROSHARA · INDIA'S FIRST BAREFOOT-FRIENDLY HANDMADE BABY SHOES</text>
+</svg>

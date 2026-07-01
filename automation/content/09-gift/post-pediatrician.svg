@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1080 1080" width="1080" height="1080">
+<defs>
+  <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+    <stop offset="0%" stop-color="#FEF9F4"/>
+    <stop offset="100%" stop-color="#F5E6CC"/>
+  </linearGradient>
+</defs>
+<rect width="1080" height="1080" fill="url(#bg)"/>
+<text x="540" y="180" text-anchor="middle" font-family="Arial" font-size="26" fill="#C4956A" letter-spacing="3">PEDIATRICIAN TIP</text>
+<text x="540" y="330" text-anchor="middle" font-family="Georgia" font-size="72" font-weight="700" fill="#3D2B1F">Barefoot is Best</text>
+<text x="540" y="430" text-anchor="middle" font-family="Arial" font-size="36" fill="#8B7355">For healthy foot development</text>
+<line x1="300" y1="490" x2="780" y2="490" stroke="#D4A574" stroke-width="1" opacity="0.3"/>
+<text x="540" y="580" text-anchor="middle" font-family="Arial" font-size="32" fill="#3D2B1F">✅ Flexible soles = natural movement</text>
+<text x="540" y="640" text-anchor="middle" font-family="Arial" font-size="32" fill="#3D2B1F">✅ Natural wool = breathable & warm</text>
+<text x="540" y="700" text-anchor="middle" font-family="Arial" font-size="32" fill="#3D2B1F">✅ Secure fit = stays on</text>
+<text x="540" y="820" text-anchor="middle" font-family="Georgia" font-size="44" font-weight="700" fill="#D4A574">CROSHARA = barefoot-friendly ✅</text>
+<text x="540" y="900" text-anchor="middle" font-family="Arial" font-size="24" fill="#8B7355">Starting at ₹599</text>
+<text x="540" y="960" text-anchor="middle" font-family="Arial" font-size="20" fill="#C4956A">Follow @crosharahandmade for baby health tips</text>
+</svg>

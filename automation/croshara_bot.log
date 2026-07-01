@@ -1,0 +1,33 @@
+2026-07-01 13:53:30,460 - Config saved
+2026-07-01 13:53:30,478 - Loaded 30 posts
+2026-07-01 13:53:30,478 - Today: 01-launch
+2026-07-01 13:53:30,478 - Caption: 🎉 We're LIVE! Presenting CROSHARA — India's newest handmade ...
+2026-07-01 13:53:35,037 - https://i.instagram.com/api/v1/launcher/sync/
+2026-07-01 13:53:36,641 - crosharahandmade [200] POST https://i.instagram.com/api/v1/launcher/sync/ (428.0.0.47.67, Google/google Pixel 8 Pro)
+2026-07-01 13:53:41,324 - https://i.instagram.com/api/v1/accounts/login/
+2026-07-01 13:53:44,384 - crosharahandmade [400] POST https://i.instagram.com/api/v1/accounts/login/ (428.0.0.47.67, Google/google Pixel 8 Pro)
+2026-07-01 13:53:44,389 - Instagram blocked: We can send you an email to help you get back into your account. If you are sure that the password is correct, then change your IP address, because it is added to the blacklist of the Instagram Server
+2026-07-01 13:53:44,389 - Will try browser method instead...
+2026-07-01 13:53:44,395 - Trying browser method...
+2026-07-01 13:53:45,162 - Opening browser to post...
+2026-07-01 13:54:20,762 - Browser method failed: Page.wait_for_selector: Timeout 30000ms exceeded.
+Call log:
+  - waiting for locator("input[name='username']") to be visible
+
+2026-07-01 13:54:20,762 - 30 posts remaining
+2026-07-01 13:55:53,187 - Loaded 30 posts
+2026-07-01 13:55:53,187 - Today: 01-launch
+2026-07-01 13:55:53,187 - Caption: 🎉 We're LIVE! Presenting CROSHARA — India's newest handmade ...
+2026-07-01 13:55:58,865 - https://i.instagram.com/api/v1/launcher/sync/
+2026-07-01 13:56:00,515 - crosharahandmade [200] POST https://i.instagram.com/api/v1/launcher/sync/ (428.0.0.47.67, Google/google Pixel 8 Pro)
+2026-07-01 13:56:06,428 - https://i.instagram.com/api/v1/accounts/login/
+2026-07-01 13:56:09,128 - crosharahandmade [400] POST https://i.instagram.com/api/v1/accounts/login/ (428.0.0.47.67, Google/google Pixel 8 Pro)
+2026-07-01 13:56:09,131 - Instagram blocked: We can send you an email to help you get back into your account. If you are sure that the password is correct, then change your IP address, because it is added to the blacklist of the Instagram Server
+2026-07-01 13:56:09,131 - Will try browser method instead...
+2026-07-01 13:56:09,134 - Trying browser method...
+2026-07-01 13:56:09,366 - Opening browser to post...
+2026-07-01 13:56:09,366 - A browser window will open. Log in to Instagram manually.
+2026-07-01 13:56:09,367 - The script will wait up to 3 minutes for you to log in.
+2026-07-01 13:56:10,919 - Waiting for you to log in on the browser...
+2026-07-01 13:59:13,758 - Timed out waiting for login. Try again.
+2026-07-01 13:59:14,219 - 30 posts remaining

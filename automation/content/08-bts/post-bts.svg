@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1080 1080" width="1080" height="1080">
+<defs>
+  <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+    <stop offset="0%" stop-color="#FEF9F4"/>
+    <stop offset="100%" stop-color="#F5E6CC"/>
+  </linearGradient>
+</defs>
+<rect width="1080" height="1080" fill="url(#bg)"/>
+<text x="540" y="180" text-anchor="middle" font-family="Arial" font-size="26" fill="#C4956A" letter-spacing="3">BEHIND THE SCENES</text>
+<text x="540" y="340" text-anchor="middle" font-family="Georgia" font-size="72" font-weight="700" fill="#3D2B1F">Every pair</text>
+<text x="540" y="430" text-anchor="middle" font-family="Georgia" font-size="72" font-weight="700" fill="#3D2B1F">starts with love</text>
+<line x1="300" y1="490" x2="780" y2="490" stroke="#D4A574" stroke-width="1" opacity="0.3"/>
+<text x="540" y="580" text-anchor="middle" font-family="Arial" font-size="34" fill="#8B7355">🧶 Hand-selected natural wool</text>
+<text x="540" y="640" text-anchor="middle" font-family="Arial" font-size="34" fill="#8B7355">👐 4-6 hours artisan craftsmanship</text>
+<text x="540" y="700" text-anchor="middle" font-family="Arial" font-size="34" fill="#8B7355">✅ 5 quality checks per pair</text>
+<text x="540" y="760" text-anchor="middle" font-family="Arial" font-size="34" fill="#8B7355">🎀 Gift-ready packaging</text>
+<text x="540" y="870" text-anchor="middle" font-family="Georgia" font-size="40" font-weight="700" fill="#D4A574">Handmade in India 🇮🇳</text>
+<text x="540" y="960" text-anchor="middle" font-family="Arial" font-size="24" fill="#8B7355">@crosharahandmade</text>
+</svg>

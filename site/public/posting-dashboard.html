@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>CROSHARA – Posting Dashboard</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--cream:#FDF6F0;--pink:#E8A0B4;--pink-dark:#D4809A;--navy:#1a1a2e;--white:#fff;--text:#2d2d3a;--text-light:#6b6b80;--shadow:0 4px 24px rgba(26,26,46,0.06);--radius:16px}
+body{font-family:'Inter',sans-serif;background:#f8f4f0;color:var(--text);padding:20px;max-width:600px;margin:0 auto}
+.header{text-align:center;padding:24px 0 20px}
+.header h1{font-family:'Playfair Display',serif;font-size:1.6rem;color:var(--navy)}
+.header h1 span{color:var(--pink)}
+.header p{font-size:0.85rem;color:var(--text-light);margin-top:4px}
+.progress-wrap{background:var(--white);border-radius:var(--radius);padding:16px 20px;margin-bottom:16px;box-shadow:var(--shadow)}
+.progress-bar{height:8px;background:var(--cream);border-radius:50px;overflow:hidden;margin-top:8px}
+.progress-fill{height:100%;background:linear-gradient(90deg,var(--pink),var(--pink-dark));border-radius:50px;transition:width 0.5s}
+.today-card{background:linear-gradient(135deg,var(--pink),var(--pink-dark));color:var(--white);border-radius:var(--radius);padding:24px;margin-bottom:16px;box-shadow:0 8px 32px rgba(232,160,180,0.3)}
+.today-card .label{font-size:0.75rem;text-transform:uppercase;letter-spacing:1px;opacity:0.8;margin-bottom:4px}
+.today-card h2{font-family:'Playfair Display',serif;font-size:1.3rem;margin-bottom:4px}
+.today-card .day-num{font-size:0.85rem;opacity:0.8}
+.caption-box{background:rgba(255,255,255,0.15);border-radius:12px;padding:16px;margin:16px 0;font-size:0.85rem;line-height:1.6;white-space:pre-wrap;max-height:200px;overflow-y:auto}
+.btn{display:block;width:100%;padding:14px;border-radius:50px;border:none;font-weight:600;font-size:0.95rem;cursor:pointer;transition:all 0.3s;text-align:center;text-decoration:none;margin-bottom:8px}
+.btn-primary{background:var(--navy);color:var(--white)}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(26,26,46,0.2)}
+.btn-secondary{background:var(--white);color:var(--navy)}
+.btn-secondary:hover{transform:translateY(-2px)}
+.btn-success{background:#22c55e;color:var(--white)}
+.checklist{background:var(--white);border-radius:var(--radius);padding:20px;margin-bottom:16px;box-shadow:var(--shadow)}
+.checklist h3{font-size:1rem;margin-bottom:12px;color:var(--navy)}
+.check-item{display:flex;align-items:center;gap:12px;padding:10px 0;border-bottom:1px solid rgba(0,0,0,0.04);font-size:0.9rem}
+.check-item:last-child{border-bottom:none}
+.check-item input[type="checkbox"]{width:20px;height:20px;accent-color:var(--pink);cursor:pointer}
+.check-item label{cursor:pointer;flex:1}
+.check-item.done label{text-decoration:line-through;color:var(--text-light)}
+.calendar{background:var(--white);border-radius:var(--radius);padding:20px;box-shadow:var(--shadow)}
+.calendar h3{font-size:1rem;margin-bottom:12px;color:var(--navy)}
+.cal-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:6px}
+.cal-day{padding:8px 4px;text-align:center;border-radius:8px;font-size:0.75rem;background:var(--cream);cursor:pointer;transition:all 0.3s}
+.cal-day .num{font-weight:600;font-size:0.85rem}
+.cal-day.done{background:rgba(34,197,94,0.15);color:#16a34a}
+.cal-day.today{background:var(--pink);color:var(--white);transform:scale(1.1)}
+.actions{margin-top:16px;display:flex;gap:8px}
+.actions .btn{flex:1;font-size:0.85rem;padding:12px}
+@media(max-width:480px){.cal-grid{grid-template-columns:repeat(5,1fr);gap:4px}.cal-day{padding:6px 2px;font-size:0.7rem}}
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>CROSHARA<span>.</span></h1>
+  <p>Posting Dashboard</p>
+</div>
+
+<div class="progress-wrap">
+  <div style="display:flex;justify-content:space-between;font-size:0.85rem">
+    <span id="progressText">0 / 30 days done</span>
+    <span id="progressPct">0%</span>
+  </div>
+  <div class="progress-bar"><div class="progress-fill" id="progressFill" style="width:0%"></div></div>
+</div>
+
+<div class="today-card" id="todayCard">
+  <div class="label">Today's Post</div>
+  <h2 id="todayTitle">Loading...</h2>
+  <div class="day-num" id="todayFolder"></div>
+  <div class="caption-box" id="todayCaption">Loading caption...</div>
+  <button class="btn btn-secondary" onclick="copyCaption()" style="background:rgba(255,255,255,0.2);color:white">Copy Caption</button>
+  <button class="btn btn-primary" onclick="markTodayDone()" style="background:white;color:var(--navy);margin-top:8px">Mark as Posted</button>
+</div>
+
+<div class="checklist">
+  <h3>Daily Posting Checklist</h3>
+  <div class="check-item" id="c1"><input type="checkbox" id="chk1"><label for="chk1">Copy caption from above</label></div>
+  <div class="check-item" id="c2"><input type="checkbox" id="chk2"><label for="chk2">Open Instagram on phone</label></div>
+  <div class="check-item" id="c3"><input type="checkbox" id="chk3"><label for="chk3">Upload photo (from content folder)</label></div>
+  <div class="check-item" id="c4"><input type="checkbox" id="chk4"><label for="chk4">Paste caption</label></div>
+  <div class="check-item" id="c5"><input type="checkbox" id="chk5"><label for="chk5">Add a few hashtags</label></div>
+  <div class="check-item" id="c6"><input type="checkbox" id="chk6"><label for="chk6">Post!</label></div>
+</div>
+
+<div class="calendar">
+  <h3>30-Day Content Calendar</h3>
+  <div class="cal-grid" id="calGrid"></div>
+  <div class="actions">
+    <button class="btn btn-secondary" onclick="resetAll()">Reset All</button>
+    <button class="btn btn-primary" onclick="downloadImage()">Download Image</button>
+  </div>
+</div>
+
+<script>
+const contentDays = [
+  {day:1,folder:"01-launch",title:"Brand Launch"},
+  {day:2,folder:"02-products",title:"Wool vs Cotton"},
+  {day:3,folder:"03-barefoot",title:"Barefoot Friendly"},
+  {day:4,folder:"04-testimonial",title:"Real Reviews"},
+  {day:5,folder:"05-tips",title:"Mom Hack"},
+  {day:6,folder:"06-colors",title:"6 Colors"},
+  {day:7,folder:"07-offer",title:"Limited Offer"},
+  {day:8,folder:"08-bts",title:"Behind the Scenes"},
+  {day:9,folder:"09-gift",title:"Gift Guide"},
+  {day:10,folder:"10-care",title:"Care Tips"},
+  {day:11,folder:"11-compare",title:"Brand Comparison"},
+  {day:12,folder:"12-festival",title:"Festival Gifting"},
+  {day:13,folder:"13-newborn",title:"Newborn Range"},
+  {day:14,folder:"14-toddler",title:"Toddler Range"},
+  {day:15,folder:"15-mom-tips",title:"Warmer Signs"},
+  {day:16,folder:"16-shipping",title:"Shipping Info"},
+  {day:17,folder:"17-sneak-peek",title:"Coming Soon"},
+  {day:18,folder:"18-custom",title:"Custom Orders"},
+  {day:19,folder:"19-winter",title:"Winter Ready"},
+  {day:20,folder:"20-family",title:"Matching Sets"},
+  {day:21,folder:"21-birth-gift",title:"Birth Gift"},
+  {day:22,folder:"22-quality",title:"Quality Check"},
+  {day:23,folder:"23-artisan",title:"Meet Artisans"},
+  {day:24,folder:"24-sizing",title:"Size Guide"},
+  {day:25,folder:"25-reel-bts",title:"BTS Reel"},
+  {day:26,folder:"26-reel-product",title:"Color Tour"},
+  {day:27,folder:"27-reel-tips",title:"Stay-On Tips"},
+  {day:28,folder:"28-reel-unbox",title:"Unboxing"},
+  {day:29,folder:"29-reel-review",title:"Reviews"},
+  {day:30,folder:"30-reel-offer",title:"Finale"}
+];
+
+const fullCaptions = {
+  "01-launch":"We're LIVE! Presenting CROSHARA - India's newest handmade baby shoe brand.\n\nEvery pair is crocheted with love by Indian artisans using 100% natural wool. No chemicals. No machines. Just pure love for your baby's tiny feet.\n\nBarefoot-friendly flexible sole\nPremium natural wool\n0-24 months sizes\n6 beautiful colors\n\nDM us to order your first pair!\n\n#Croshara #HandmadeBabyShoes #NewBrandLaunch #IndianHandmade #CrochetBooties #BabyFashionIndia #WoolenBooties #SupportSmallBusiness #MadeInIndia #BabyCare #MomsOfInstagram #BabyProducts #GiftForBaby",
+  "02-products":"Why wool beats cotton (every time)\n\nMost baby booties use printed cotton:\nMachine-made prints\nStiff, not flexible\nNOT barefoot-friendly\n\nCROSHARA uses natural wool:\nHand-crocheted by Indian artisans\nFlexible barefoot-friendly soles\n3x warmer than cotton\n\nYour baby deserves the best. DM to order!\n\n#WoolVsCotton #HandmadeIndia #BabyBooties #NaturalWool #Croshara #BarefootBaby #ChooseHandmade",
+  "03-barefoot":"India's 1st Barefoot-Friendly Handmade Baby Shoe\n\nDid you know? Pediatricians recommend barefoot for healthy foot development.\n\nCROSHARA booties:\nFlexible soles = natural movement\nNatural wool = breathable and warm\nSecure fit = stays on baby's feet\n\nMost other booties (Mama & Peaches, Little Charlie) use stiff soles that restrict movement. We're different.\n\nDM to order!\n\n#BarefootFriendly #BabyHealth #PediatricianApproved #Croshara #FirstSteps #HealthyBaby",
+  "04-testimonial":"Real moms. Real reviews. Real happiness.\n\nFinally booties that are soft AND stay on! My 6-month-old wears them all night and they never slip off. - Priya, Mumbai\n\nOrdered for my newborn and they're SO soft. Perfect for sensitive skin. - Shruti\n\nBest purchase for winter! My baby's feet stay warm all night. - Ananya\n\nJoin 200+ happy families. DM to order!\n\n#RealReview #HappyMom #CustomerLove #Croshara #BabyBooties #HandmadeWithLove #TrustedByMoms",
+  "05-tips":"Mom hack of the day\n\nKeep CROSHARA booties in your diaper bag.\n\nWhy?\nSudden AC in malls/restaurants = cold baby\nNight feeds = cold feet\nDoctor visits\nCar rides\n\nOur booties are lightweight, packable, and instantly warm.\n\nFollow @crosharahandmade for more mom hacks!\n\n#MomHack #DiaperBag #ParentingTips #Croshara #BabyHacks #NewMom #BabyEssentials",
+  "06-colors":"6 colors. Endless cuteness. Which is YOUR vibe?\n\nMustard - Bestseller\nBlush Pink - Trending\nSky Blue - Perfect unisex\nMint - Fresh and cute\nCream - Classic elegance\nLavender - Premium pick\n\nAll available 0-24 months.\nStarting at just Rs 599.\n\nComment your favorite! DM to order\n\n#ColorOptions #BabyFashion #Croshara #HandmadeIndia #BabyBooties #MustardBabe #GiftForBaby",
+  "07-offer":"LIMITED TIME OFFER\n\nFree shipping on ALL orders\nBuy 2+ pairs = 10% EXTRA off\n\nPerfect time to:\nStock up for winter\nFind baby shower gifts\nGet matching sets\n\nEnds Sunday midnight\nDM 'OFFER' to claim!\n\n#WeekendOffer #FreeShipping #BabySale #Croshara #HandmadeBaby #LimitedTime #BabyBooties",
+  "08-bts":"The hands behind CROSHARA\n\n4-6 hours per pair. Hundreds of stitches. One-of-a-kind love.\n\nEvery bootie begins with carefully selected natural wool and hours of dedicated craftsmanship. No machines. No shortcuts. Just pure passion.\n\nWhen you buy CROSHARA, you support Indian artisans and keep traditional craftsmanship alive.\n\nDM to experience the difference.\n\n#HandmadeInIndia #BTS #ArtisanLove #CrochetLife #SupportHandmade #Croshara #BabyBooties",
+  "09-gift":"Need a baby shower gift?\n\nCROSHARA booties = the perfect gift because:\nHandmade with love\n6 beautiful colors\nPremium gift packaging\nPractical AND adorable\n0-24 months (grows with baby)\n\nStarting at just Rs 599.\nDM to order with a personalized note!\n\n#BabyShowerGift #GiftForBaby #NewbornGift #Croshara #HandmadeGift #BabyRegistry #FestivalGift",
+  "10-care":"How to care for your CROSHARA wool booties\n\n1. Hand wash with mild soap\n2. Cold water only (no hot!)\n3. Gently squeeze (don't wring)\n4. Air dry flat (away from sunlight)\n5. Store in a dry place\n\nWith proper care, your booties last for months - and can even be passed down!\n\nFollow @crosharahandmade for more baby tips!\n\n#BabyCare #WoolCare #HandmadeCare #Croshara #ParentingTips #BabyEssentials",
+  "11-compare":"CROSHARA vs other brands - the truth\n\nMost baby booties (Mama & Peaches, Little Charlie):\nCotton/faux leather (not warm)\nStiff soles (restrict movement)\nMass-produced (no uniqueness)\nLimited sizes\n\nCROSHARA:\nNatural wool (3x warmer)\nBarefoot-friendly flexible soles\nHand-crocheted (each pair unique)\n0-24 months (every stage!)\nFrom Rs 599\n\nBetter for baby. Better value.\n\nDM to order!\n\n#Comparison #ValueForMoney #Croshara #ChooseHandmade #BabyBooties #SmartMoms #HandmadeVsMass",
+  "12-festival":"Festival gifting? Sorted\n\nBeautifully packed CROSHARA gift sets - perfect for:\nDiwali, Pongal, Onam\nChristmas, Baby showers\n\nChoose from 6 colors or let us customize!\n\nGift sets from Rs 1,199.\nDM 'FESTIVAL' to order with a personalized note!\n\n#FestivalGift #DiwaliGift #GiftSet #Croshara #HandmadeGift #BabyGift #IndianFestival",
+  "13-newborn":"For the tiniest toes\n\nOur newborn booties (0-6 months) are crafted with:\nExtra-soft wool for sensitive newborn skin\nGentle fit - no rough seams\nLightweight and breathable\nPerfect temperature regulation\n\nBecause even the smallest feet deserve the best.\n\nStarting at Rs 599. DM to order!\n\n#NewbornEssentials #NewbornStyle #TinyToes #Croshara #NewbornBaby #BabyMustHave #HandmadeNewborn",
+  "14-toddler":"For toddlers on the move\n\nOur toddler range (6-24 months) is built for:\nSecure grip - flexible sole, stays on\nStretchy wool fit - grows with their feet\n6 colors to match every outfit\nWarmth without the bulk\n\nM&P and Graminarts stop at 0-12mo. We go all the way to 24mo.\n\nBecause your toddler deserves warmth too.\n\nRs 799 - Rs 1,299. DM to order!\n\n#ToddlerEssentials #ToddlerFashion #Croshara #FirstWalkers #BabyShoesIndia #HandmadeForToddlers #ToddlerMom #ActiveBaby",
+  "15-mom-tips":"3 signs your baby needs warmer shoes\n\n1. Cold toes after naps - blood flow slows during sleep\n2. Complaining feet in stroller - no movement = cold\n3. Taking socks off constantly - they're uncomfortable\n\nCROSHARA wool booties solve all three:\nNatural wool insulation - warmer than cotton\nStretchy fit - stays on, no slipping\nBreathable - no sweaty feet\n\nDon't wait until they're shivering. DM to order!\n\n#MomHacks #BabyTips #Croshara #ParentingAdvice #BabyCare #NewMomTips #WarmBaby",
+  "16-shipping":"How we deliver warmth across India\n\nEvery CROSHARA order includes:\nFree shipping - no hidden costs\nTracking on every order\nHand-checked quality before dispatch\nGift wrapping - ready to present\n\nWe ship to all cities - Mumbai, Delhi, Bangalore, Hyderabad, Chennai, and more.\n\nFrom our artisans to your doorstep.\n\nDM your pincode for delivery estimate!\n\n#FreeShipping #HandmadeIndia #Croshara #MadeInIndia #Delivery #SmallBusiness #IndianBrands #SupportArtisans",
+  "17-sneak-peek":"Sneak peek: What's coming next?\n\nWe're working on something special...\nNew pastel shades (mint, lavender, peach)\nGift boxes with handwritten notes\nFamily sets - matching booties for siblings\n\nYou asked, we listened. Coming soon!\n\nWhich one are you most excited about? Comment below!\n\nFollow @crosharahandmade so you don't miss the launch!\n\n#SneakPeek #ComingSoon #Croshara #NewCollection #HandmadeInIndia #BabyFashion #SmallBusinessIndia #ExcitingTimes",
+  "18-custom":"Want something unique? We do custom orders!\n\nChoose your:\nColor - any combination of our 6 shades\nSize - 0-24 months, perfectly fitted\nEmbellishment - tiny bows, floral accents, or keep it classic\nGift message - handwritten in every box\n\nMinimum 5 pairs for custom batches. Perfect for:\nBaby shower favors\nGift sets for new moms\nBoutique stockists\n\nDM us your ideas! Let's create something beautiful together.\n\n#CustomMade #HandmadeWithLove #Croshara #CustomOrder #BabyGift #ArtisanMade #UniqueGifts",
+  "19-winter":"Winter is coming - is your baby ready?\n\nDid you know? Babies lose heat 4x faster than adults through their feet and head.\n\nCotton socks won't cut it this winter. Here's why CROSHARA wool wins:\n3x warmer than cotton (tested!)\nBreathable - no sweaty, clammy feet\nStays on - no more lost socks\nCute colors that pop\n\nM&P uses cotton blend. Graminarts uses acrylic. We use ONLY pure natural wool.\n\nYour baby deserves the best this winter.\n\nDM to order!\n\n#WinterReady #WinterBaby #Croshara #BabyWarmth #WoolVsCotton #BabyCare #WinterEssentials",
+  "20-family":"Matching booties for the whole family?\n\nOkay, maybe not for parents. But siblings!\n\nOur 6-color range means:\nBig sibling gets navy blue\nNew baby gets soft pink\nOr both get matching mint green\n\nCoordinating sibling sets are our most-requested custom order!\n\nStarting at Rs 599 per pair. DM to order matching sets!\n\n#SiblingStyle #MatchingSets #Croshara #SiblingLove #BabyFashion #HandmadeForSiblings #BrotherAndSister #BabyStyle",
+  "21-birth-gift":"The perfect baby shower gift - already decided!\n\nWhy CROSHARA is the gift every new mom actually wants:\nPremium look - no one believes it's under Rs 1,299\nUseful - every baby needs warm feet\nHandmade - shows you put thought into it\nGift wrapped - ready to present\nUnisex colors - works for any baby\n\nSkip the generic onesies and plastic toys. Give warmth. Give love. Give CROSHARA.\n\nDM to order as a gift! We include a free handwritten note\n\n#BabyShower #GiftIdeas #NewbornGift #Croshara #HandmadeGift #BabyRegistry #GiftForBaby #ThoughtfulGifts",
+  "22-quality":"Why CROSHARA quality beats mass-produced baby shoes\n\nWe tested our booties vs market brands:\n\nCROSHARA vs M&P (Rs 399):\n100% wool vs cotton blend\n0-24mo vs 0-6mo\n6 colors vs 3\nBarefoot flexible vs stiff sole\n\nCROSHARA vs Little Charlie (Rs 1,999):\nSame premium quality\nHalf the price\nMade in India vs imported\nDirect from artisan vs middleman\n\nCROSHARA vs Baby Elenore (Rs 3,300):\nSame barefoot philosophy\n60% cheaper\nIndian wool vs imported\n\nYou don't need to spend Rs 3,000+ for premium quality.\n\n#QualityCheck #Croshara #HandmadeVsMassProduced #BabyShoes #MadeInIndia #PremiumBaby #ValueForMoney",
+  "23-artisan":"Meet the hands behind CROSHARA\n\nEvery pair of booties is made by skilled Indian artisans who have been crocheting for 15+ years.\n\nWhat makes their craft special:\n4+ hours per pair - each stitch done by hand\nNatural wool sourced from local Indian suppliers\nZero machinery - zero chemicals\nFair wages - empowering local craftspeople\n\nWhen you buy CROSHARA, you're not just buying baby shoes. You're supporting Indian artistry.\n\nFollow us to see more behind-the-scenes content!\n\n#ArtisanMade #IndianArtisans #SupportHandmade #Croshara #MadeInIndia #VocalForLocal #HandmadeInIndia #EmpowerArtisans #Craftsmanship",
+  "24-sizing":"Finding the perfect fit - easier than you think!\n\nHow to size your baby for CROSHARA booties:\n\n1. Trace foot on paper\n2. Measure heel-to-longest-toe in cm\n3. Check our size guide (link in bio)\n\nSize chart:\n0-6mo - foot up to 9cm (Newborn)\n6-12mo - foot up to 11cm (Infant)\n12-18mo - foot up to 12.5cm (Walker)\n18-24mo - foot up to 14cm (Toddler)\n\nPro tip: Wool stretches! If between sizes, size down for a snug fit.\n\nDM for personalized sizing help!\n\n#SizingGuide #BabyShoes #Croshara #PerfectFit #BabyFoot #ParentingTips #NewMom #BabyMustHave",
+  "25-reel-bts":"Behind the scenes: How CROSHARA booties are made\n\nFrom skein to shoe - every pair goes through:\n1. Wool selection (only the softest)\n2. Hand-crocheting (4+ hours per pair)\n3. Quality check (every stitch inspected)\n4. Gentle wash and block\n5. Gift wrapping with love\n\nNo factories. No machines. Just pure skill and patience.\n\nThis is what handmade truly means.\n\nFollow for more BTS content!\n\n#BehindTheScenes #HandmadeProcess #Croshara #IndianArtisans #MadeInIndia #HowItsMade #CrochetLove",
+  "26-reel-product":"Quick tour of every CROSHARA color\n\nWhich one's your favorite?\n\nBlush Pink - soft and sweet\nMint Green - fresh and unisex\nCream - classic elegance\nNavy Blue - bold and timeless\nGrey - modern minimalist\nWalnut Brown - earthy and warm\n\nAll 6 colors available in all sizes (0-24mo).\n\nMix and match - siblings, friends, or one of each!\n\nStarting Rs 599. DM to order!\n\n#ProductShowcase #Croshara #BabyShoes #ColorCollection #HandmadeColors #BabyFashion #InstaShopping #SmallBusinessCheck",
+  "27-reel-tips":"How to make baby shoes stay on\n\nTired of losing socks? Try these tricks:\n\n1. Size correctly - our guide helps\n2. Wool grip - natural fibers stay put\n3. Over pants - creates friction hold\n4. Check after car seat - shoes slip off in buckles\n\nCROSHARA booties are designed to stay on:\nStretchy ribbed ankle\nSnug but gentle fit\nNatural wool grip\n\nNo more lost shoes! DM to try a pair\n\n#ParentingHacks #BabyTips #Croshara #LostSock #MomLife #BabyHacks #MomProblems #ToddlerMom",
+  "28-reel-unbox":"Unboxing CROSHARA - the Rs 599 luxury experience\n\nWhat's inside:\nPremium gift box with ribbon\nHandmade wool booties\nCare instructions card\nHandwritten thank-you note\nNatural wool sample (so you can feel the quality)\n\nYes, this is our standard packaging. No extra charge.\n\nThe best part? Everything is eco-friendly. No plastic. No waste.\n\nDM to order your own unboxing experience!\n\n#Unboxing #Croshara #HandmadePackage #GiftReady #LuxuryBaby #EcoFriendly #SmallBusinessLove #FirstLook",
+  "29-reel-review":"Better than anything we found on Amazon\n\nReal words from real CROSHARA customers:\n\nThe wool is so soft - my baby didn't want to take them off!\nPerfect for our winter walks. Stays on even when running!\nGot them as a gift and immediately ordered 3 more pairs\nFinally - Indian handmade booties that look premium\n\nJoin 50+ happy families who chose CROSHARA.\n\nDM to become our next 5-star review!\n\n#CustomerReview #Testimonial #Croshara #HappyCustomers #5Star #BabyShoes #RealReviews #TrustedBrand",
+  "30-reel-offer":"This is it - the complete CROSHARA collection\n\n30 days. 30 posts. One brand built with love.\n\nWhat we stand for:\nPure wool, not cotton blends\nMade by Indian artisans, not machines\nBarefoot-friendly, 0-24 months\n6 stunning colors\nRs 599 - Rs 1,299 - premium without the premium price\n\nCROSHARA - India's first barefoot-friendly handmade baby shoe brand.\n\nFollow us @crosharahandmade for daily content.\nDM to order your first pair!\n\n#Croshara #BrandLaunch #HandmadeIndia #BabyShoes #MadeInIndia #VocalForLocal #BarefootBaby #IndianBrand #NewBeginnings"
+};
+
+let doneDays = JSON.parse(localStorage.getItem('croshara_done') || '[]');
+const today = new Date();
+const startDate = new Date(2026, 6, 1);
+const daysSince = Math.floor((today - startDate) / 86400000);
+const currentDayIndex = Math.min(Math.max(daysSince % 30, 0), 29);
+const currentDay = contentDays[currentDayIndex];
+
+function render() {
+  renderCalendar();
+  renderToday();
+  renderProgress();
+  renderChecklist();
+}
+
+function renderToday() {
+  const d = currentDay;
+  document.getElementById('todayTitle').textContent = d.title;
+  document.getElementById('todayFolder').textContent = Day ${d.day}  ${d.folder}/;
+  document.getElementById('todayCaption').textContent = fullCaptions[d.folder] || 'Caption not found';
+  const card = document.getElementById('todayCard');
+  if (doneDays.includes(d.folder)) {
+    card.style.background = 'linear-gradient(135deg,#22c55e,#16a34a)';
+    document.querySelector('.today-card .label').textContent = 'Posted';
+  } else {
+    card.style.background = 'linear-gradient(135deg,var(--pink),var(--pink-dark))';
+    document.querySelector('.today-card .label').textContent = "Today's Post";
+  }
+}
+
+function renderCalendar() {
+  const grid = document.getElementById('calGrid');
+  grid.innerHTML = contentDays.map(d => `
+    <div class="cal-day${doneDays.includes(d.folder)?' done':''}${d.folder===currentDay.folder?' today':''}" onclick="jumpTo('${d.folder}')">
+      <div class="num">${d.day}</div>
+      ${d.title.slice(0,10)}
+    </div>
+  `).join('');
+}
+
+function renderProgress() {
+  const pct = Math.round((doneDays.length/30)*100);
+  document.getElementById('progressText').textContent = ${doneDays.length} / 30 days done;
+  document.getElementById('progressPct').textContent = ${pct}%;
+  document.getElementById('progressFill').style.width = pct+'%';
+}
+
+function renderChecklist() {
+  const checks = JSON.parse(localStorage.getItem('croshara_checks') || '{}');
+  const key = currentDay.folder;
+  for(let i=1;i<=6;i++) {
+    const el = document.getElementById('chk'+i);
+    if(el) {
+      el.checked = checks[key+'_chk'+i] || false;
+      document.getElementById('c'+i).className = 'check-item'+(el.checked?' done':'');
+    }
+  }
+}
+
+document.addEventListener('change', function(e) {
+  if(e.target.id?.startsWith('chk')) {
+    const checks = JSON.parse(localStorage.getItem('croshara_checks') || '{}');
+    checks[currentDay.folder+'_'+e.target.id] = e.target.checked;
+    localStorage.setItem('croshara_checks', JSON.stringify(checks));
+    document.getElementById('c'+e.target.id.slice(3)).className = 'check-item'+(e.target.checked?' done':'');
+  }
+});
+
+function copyCaption() {
+  const text = fullCaptions[currentDay.folder] || '';
+  navigator.clipboard.writeText(text).then(() => {
+    const btn = document.querySelector('.today-card .btn-secondary');
+    btn.textContent = 'Copied!';
+    setTimeout(()=>btn.textContent='Copy Caption',2000);
+  });
+}
+
+function markTodayDone() {
+  if(!doneDays.includes(currentDay.folder)) {
+    doneDays.push(currentDay.folder);
+    localStorage.setItem('croshara_done', JSON.stringify(doneDays));
+    render();
+  }
+}
+
+function jumpTo(folder) {
+  localStorage.setItem('croshara_jump', folder);
+  window.location.reload();
+}
+
+function resetAll() {
+  if(confirm('Reset all progress?')) {
+    localStorage.removeItem('croshara_done');
+    localStorage.removeItem('croshara_checks');
+    doneDays = [];
+    render();
+  }
+}
+
+function downloadImage() {
+  window.open(https://github.com/arshadbagwan1920/croshara/tree/main/automation/content/${currentDay.folder}, '_blank');
+}
+
+render();
+</script>
+</body>
+</html>

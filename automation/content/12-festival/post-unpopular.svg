@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1080 1080" width="1080" height="1080">
+<defs>
+  <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+    <stop offset="0%" stop-color="#0D0D0D"/>
+    <stop offset="100%" stop-color="#1A0F0A"/>
+  </linearGradient>
+</defs>
+<rect width="1080" height="1080" fill="url(#bg)"/>
+<text x="540" y="180" text-anchor="middle" font-family="Arial" font-size="26" fill="#D4A574" letter-spacing="3">UNPOPULAR OPINION</text>
+<text x="540" y="340" text-anchor="middle" font-family="Georgia" font-size="64" font-weight="700" fill="#F5E6CC">"Most baby booties</text>
+<text x="540" y="420" text-anchor="middle" font-family="Georgia" font-size="64" font-weight="700" fill="#F5E6CC">are overpriced"</text>
+<line x1="250" y1="480" x2="830" y2="480" stroke="#D4A574" stroke-width="1" opacity="0.3"/>
+<text x="540" y="580" text-anchor="middle" font-family="Arial" font-size="34" fill="#FF6B6B">₹399 for printed cotton? 🤔</text>
+<text x="540" y="650" text-anchor="middle" font-family="Arial" font-size="34" fill="#64C896">₹599 for real hand-crocheted wool ✅</text>
+<text x="540" y="780" text-anchor="middle" font-family="Georgia" font-size="44" font-weight="700" fill="#D4A574">Better value. Better warmth.</text>
+<text x="540" y="860" text-anchor="middle" font-family="Arial" font-size="26" fill="#8B7355">Real handmade. Real worth it.</text>
+<text x="540" y="960" text-anchor="middle" font-family="Arial" font-size="24" fill="#D4A574">DM @crosharahandmade</text>
+</svg>

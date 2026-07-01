@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1080 1080" width="1080" height="1080">
+<defs>
+  <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+    <stop offset="0%" stop-color="#FEF9F4"/>
+    <stop offset="100%" stop-color="#F5E6CC"/>
+  </linearGradient>
+  <linearGradient id="gold" x1="0" y1="0" x2="1" y2="1">
+    <stop offset="0%" stop-color="#D4A574"/>
+    <stop offset="100%" stop-color="#C4956A"/>
+  </linearGradient>
+</defs>
+<rect width="1080" height="1080" fill="url(#bg)"/>
+<rect x="40" y="40" width="1000" height="1000" rx="30" fill="none" stroke="#D4A574" stroke-width="2" opacity="0.3"/>
+<text x="540" y="160" text-anchor="middle" font-family="Georgia" font-size="28" fill="#C4956A" letter-spacing="3">BABY FOOT FACT #1</text>
+<text x="540" y="380" text-anchor="middle" font-family="Georgia" font-size="100" font-weight="700" fill="#3D2B1F">28 bones</text>
+<text x="540" y="480" text-anchor="middle" font-family="Georgia" font-size="90" font-weight="700" fill="#3D2B1F">per baby foot</text>
+<text x="540" y="580" text-anchor="middle" font-family="Arial" font-size="36" fill="#8B7355">That's MORE than adults! (Adults have 26)</text>
+<text x="540" y="640" text-anchor="middle" font-family="Arial" font-size="36" fill="#8B7355">And they're mostly cartilage.</text>
+<rect x="340" y="700" width="400" height="60" rx="30" fill="url(#gold)"/>
+<text x="540" y="738" text-anchor="middle" font-family="Arial" font-size="26" font-weight="700" fill="#0D0D0D">Why barefoot-friendly matters?</text>
+<text x="540" y="810" text-anchor="middle" font-family="Arial" font-size="28" fill="#D4A574">Stiff soles can restrict natural development</text>
+<text x="540" y="860" text-anchor="middle" font-family="Arial" font-size="28" fill="#D4A574">CROSHARA = flexible barefoot-friendly design</text>
+<circle cx="540" cy="940" r="30" fill="#D4A574"/>
+<text x="540" y="955" text-anchor="middle" font-family="Arial" font-size="50" fill="#F5E6CC">🩷</text>
+<text x="540" y="1010" text-anchor="middle" font-family="Arial" font-size="22" fill="#8B7355">@crosharahandmade</text>
+<text x="540" y="1050" text-anchor="middle" font-family="Arial" font-size="18" fill="#C4956A">Follow for more baby foot tips!</text>
+</svg>

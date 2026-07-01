@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gift Builder — CROSHARA Baby Shoes</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Inter', sans-serif;
+      background: #FDF6F0;
+      color: #1a1a2e;
+      line-height: 1.6;
+    }
+    h1, h2, h3, h4 { font-family: 'Playfair Display', serif; font-weight: 600; }
+    .container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+
+    /* Hero */
+    .hero {
+      background: linear-gradient(135deg, #1a1a2e 0%, #2a2a4e 100%);
+      color: #fff;
+      text-align: center;
+      padding: 80px 24px 60px;
+    }
+    .hero h1 { font-size: 3rem; margin-bottom: 12px; }
+    .hero h1 span { display: inline-block; }
+    .hero p { font-size: 1.15rem; opacity: 0.85; font-weight: 400; }
+    .hero .emoji { font-size: 3.5rem; display: block; margin-bottom: 16px; }
+
+    /* Builder Layout */
+    .builder { padding: 60px 0; }
+    .builder-grid {
+      display: grid;
+      grid-template-columns: 1fr 400px;
+      gap: 40px;
+      align-items: start;
+    }
+    @media (max-width: 900px) {
+      .builder-grid { grid-template-columns: 1fr; }
+      .hero h1 { font-size: 2rem; }
+    }
+
+    /* Form */
+    .form-section { background: #fff; border-radius: 20px; padding: 36px; box-shadow: 0 4px 24px rgba(0,0,0,0.06); }
+    .form-section h2 { font-size: 1.5rem; margin-bottom: 28px; color: #1a1a2e; }
+    .form-group { margin-bottom: 22px; }
+    .form-group label { display: block; font-weight: 600; font-size: 0.9rem; margin-bottom: 6px; color: #1a1a2e; }
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      width: 100%;
+      padding: 12px 16px;
+      border: 2px solid #eee;
+      border-radius: 12px;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.95rem;
+      transition: border 0.3s;
+      background: #FDF6F0;
+    }
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus { outline: none; border-color: #E8A0B4; }
+    .form-group textarea { resize: vertical; min-height: 100px; }
+    .char-count { text-align: right; font-size: 0.8rem; color: #999; margin-top: 4px; }
+
+    /* Color Swatches */
+    .swatches { display: flex; gap: 12px; flex-wrap: wrap; }
+    .swatch {
+      width: 44px; height: 44px; border-radius: 50%;
+      cursor: pointer; border: 3px solid transparent;
+      transition: all 0.3s; position: relative;
+    }
+    .swatch:hover { transform: scale(1.1); }
+    .swatch.active { border-color: #1a1a2e; box-shadow: 0 0 0 3px #fff, 0 0 0 5px #1a1a2e; }
+    .swatch.check:after {
+      content: '✓'; position: absolute; inset: 0;
+      display: flex; align-items: center; justify-content: center;
+      color: #fff; font-weight: 700; font-size: 1.2rem;
+    }
+
+    /* Size Radios */
+    .sizes { display: flex; gap: 10px; flex-wrap: wrap; }
+    .size-option { position: relative; }
+    .size-option input { position: absolute; opacity: 0; pointer-events: none; }
+    .size-option label {
+      display: flex; align-items: center; justify-content: center;
+      width: 52px; height: 52px; border-radius: 12px;
+      border: 2px solid #eee; cursor: pointer;
+      font-weight: 600; font-size: 0.85rem;
+      transition: all 0.3s; background: #FDF6F0;
+    }
+    .size-option input:checked + label { border-color: #E8A0B4; background: #E8A0B4; color: #fff; }
+    .size-option label:hover { border-color: #E8A0B4; }
+
+    /* Wrapping */
+    .wrapping-options { display: flex; gap: 12px; flex-wrap: wrap; }
+    .wrapping-option { position: relative; flex: 1; min-width: 140px; }
+    .wrapping-option input { position: absolute; opacity: 0; pointer-events: none; }
+    .wrapping-option label {
+      display: flex; flex-direction: column; align-items: center; gap: 6px;
+      padding: 16px 12px; border-radius: 14px; border: 2px solid #eee;
+      cursor: pointer; transition: all 0.3s; background: #FDF6F0;
+      font-weight: 500; font-size: 0.85rem; text-align: center;
+    }
+    .wrapping-option input:checked + label { border-color: #E8A0B4; background: #fff5f8; }
+    .wrapping-option label:hover { border-color: #E8A0B4; }
+    .wrapping-option .wrap-icon { font-size: 1.6rem; }
+
+    /* Preview Panel */
+    .preview-panel {
+      background: #fff; border-radius: 20px; padding: 32px;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.06);
+      position: sticky; top: 24px;
+    }
+    .preview-panel h3 { font-size: 1.2rem; margin-bottom: 20px; color: #1a1a2e; text-align: center; }
+
+    .gift-card {
+      background: #FDF6F0; border-radius: 18px; padding: 28px 24px;
+      border: 2px solid #eee; position: relative; overflow: hidden;
+      min-height: 280px; display: flex; flex-direction: column;
+      transition: all 0.5s ease;
+    }
+    .gift-card .accent-bar {
+      position: absolute; top: 0; left: 0; right: 0; height: 6px;
+      transition: background 0.4s;
+    }
+    .gift-card .card-occasion {
+      font-size: 0.75rem; text-transform: uppercase; letter-spacing: 2px;
+      color: #E8A0B4; font-weight: 600; margin-bottom: 12px;
+    }
+    .gift-card .card-to { font-size: 0.9rem; color: #999; margin-bottom: 2px; }
+    .gift-card .card-name { font-family: 'Playfair Display', serif; font-size: 1.6rem; font-weight: 700; color: #1a1a2e; margin-bottom: 16px; }
+    .gift-card .card-message {
+      font-size: 0.95rem; color: #444; line-height: 1.6;
+      flex: 1; font-style: italic; margin-bottom: 16px;
+    }
+    .gift-card .card-from { font-size: 0.85rem; color: #E8A0B4; font-weight: 600; margin-top: auto; }
+    .gift-card .card-details {
+      display: flex; gap: 16px; margin-top: 14px; padding-top: 14px;
+      border-top: 1px solid #eee; font-size: 0.8rem; color: #888;
+    }
+    .gift-card .card-details span { display: flex; align-items: center; gap: 4px; }
+
+    .preview-meta { margin-top: 20px; }
+    .preview-meta .meta-badge {
+      display: inline-block; background: #fff5f8; color: #E8A0B4;
+      padding: 6px 16px; border-radius: 20px; font-weight: 600;
+      font-size: 0.85rem; margin-bottom: 8px;
+    }
+    .preview-meta p { font-size: 0.85rem; color: #888; }
+
+    /* CTAs */
+    .cta-section { text-align: center; padding: 40px 0 60px; }
+    .cta-btn {
+      display: inline-flex; align-items: center; gap: 10px;
+      padding: 16px 36px; border-radius: 50px; text-decoration: none;
+      font-weight: 600; font-size: 1rem; transition: all 0.4s;
+      margin: 8px;
+    }
+    .cta-btn.primary {
+      background: linear-gradient(135deg, #E8A0B4, #D4809A);
+      color: #fff; box-shadow: 0 8px 24px rgba(232,160,180,0.35);
+    }
+    .cta-btn.primary:hover { transform: translateY(-3px); box-shadow: 0 12px 32px rgba(232,160,180,0.45); }
+    .cta-btn.secondary {
+      background: #fff; color: #1a1a2e; border: 2px solid #eee;
+    }
+    .cta-btn.secondary:hover { border-color: #E8A0B4; transform: translateY(-3px); }
+  </style>
+</head>
+<body>
+
+  <!-- Hero -->
+  <section class="hero">
+    <span class="emoji">🎁</span>
+    <h1>Build Your Perfect Baby Gift</h1>
+    <p>Add a personal touch to every pair</p>
+  </section>
+
+  <!-- Builder -->
+  <section class="builder">
+    <div class="container">
+      <div class="builder-grid">
+
+        <!-- Form -->
+        <div class="form-section">
+          <h2>Gift Details</h2>
+
+          <div class="form-group">
+            <label for="recipient">Recipient's Name</label>
+            <input type="text" id="recipient" placeholder="e.g. Little Aanya" value="Little Aanya">
+          </div>
+
+          <div class="form-group">
+            <label for="occasion">Occasion</label>
+            <select id="occasion">
+              <option value="Baby Shower">Baby Shower</option>
+              <option value="Newborn Visit">Newborn Visit</option>
+              <option value="Birthday">Birthday</option>
+              <option value="Just Because" selected>Just Because</option>
+              <option value="Festival">Festival</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="message">Gift Message <span style="font-weight:400;color:#999;">(max 200 characters)</span></label>
+            <textarea id="message" placeholder="Write your heartfelt message..." maxlength="200">Wishing you and your little one endless joy, tiny steps, and big adventures! 🐾</textarea>
+            <div class="char-count"><span id="charCount">62</span>/200</div>
+          </div>
+
+          <div class="form-group">
+            <label>Shoe Color</label>
+            <div class="swatches" id="colorSwatches">
+              <div class="swatch active check" data-color="#FDF6F0" data-name="Cream" style="background:#FDF6F0;border-color:#ddd;"></div>
+              <div class="swatch" data-color="#E8A0B4" data-name="Blush Pink" style="background:#E8A0B4;"></div>
+              <div class="swatch" data-color="#D4809A" data-name="Rose" style="background:#D4809A;"></div>
+              <div class="swatch" data-color="#1a1a2e" data-name="Navy" style="background:#1a1a2e;"></div>
+              <div class="swatch" data-color="#C9A96E" data-name="Gold" style="background:#C9A96E;"></div>
+              <div class="swatch" data-color="#B8D4D4" data-name="Mint" style="background:#B8D4D4;"></div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label>Size</label>
+            <div class="sizes" id="sizeOptions">
+              <div class="size-option"><input type="radio" name="size" id="size-xs" value="XS (0-3mo)"><label for="size-xs">XS</label></div>
+              <div class="size-option"><input type="radio" name="size" id="size-s" value="S (3-6mo)" checked><label for="size-s">S</label></div>
+              <div class="size-option"><input type="radio" name="size" id="size-m" value="M (6-12mo)"><label for="size-m">M</label></div>
+              <div class="size-option"><input type="radio" name="size" id="size-l" value="L (12-18mo)"><label for="size-l">L</label></div>
+              <div class="size-option"><input type="radio" name="size" id="size-xl" value="XL (18-24mo)"><label for="size-xl">XL</label></div>
+              <div class="size-option"><input type="radio" name="size" id="size-xxl" value="XXL (2-3yr)"><label for="size-xxl">XXL</label></div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label>Wrapping</label>
+            <div class="wrapping-options" id="wrappingOptions">
+              <div class="wrapping-option"><input type="radio" name="wrapping" id="wrap-giftbox" value="Gift Box + Ribbon" checked><label for="wrap-giftbox"><span class="wrap-icon">🎀</span>Gift Box + Ribbon</label></div>
+              <div class="wrapping-option"><input type="radio" name="wrapping" id="wrap-eco" value="Eco Wrap"><label for="wrap-eco"><span class="wrap-icon">🌿</span>Eco Wrap</label></div>
+              <div class="wrapping-option"><input type="radio" name="wrapping" id="wrap-premium" value="Premium Box"><label for="wrap-premium"><span class="wrap-icon">✨</span>Premium Box</label></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Preview -->
+        <div class="preview-panel">
+          <h3>Gift Preview</h3>
+          <div class="gift-card" id="giftCard">
+            <div class="accent-bar" id="accentBar" style="background:#E8A0B4;"></div>
+            <div class="card-occasion" id="cardOccasion">JUST BECAUSE</div>
+            <div class="card-to">To</div>
+            <div class="card-name" id="cardName">Little Aanya</div>
+            <div class="card-message" id="cardMessage">Wishing you and your little one endless joy, tiny steps, and big adventures! 🐾</div>
+            <div class="card-from">From CROSHARA ♡</div>
+            <div class="card-details">
+              <span id="cardSize">👟 S (3-6mo)</span>
+              <span id="cardWrap">🎀 Gift Box + Ribbon</span>
+            </div>
+          </div>
+          <div class="preview-meta">
+            <div class="meta-badge" id="occasionBadge">💝 Perfect for: Just Because</div>
+            <p id="colorName">Selected: Blush Pink</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- CTAs -->
+  <section class="cta-section">
+    <a href="https://www.instagram.com/crosharahandmade" target="_blank" rel="noopener" class="cta-btn primary">📩 DM to Order on Instagram</a>
+    <a href="/" class="cta-btn secondary">← Back to Store</a>
+  </section>
+
+  <!-- Floating DM Button -->
+  <a href="https://www.instagram.com/crosharahandmade" target="_blank" rel="noopener" class="float-dm" style="position:fixed;bottom:24px;right:24px;z-index:9999;display:flex;align-items:center;gap:10px;background:linear-gradient(135deg,#E8A0B4,#D4809A);color:#fff;padding:14px 24px;border-radius:50px;text-decoration:none;font-weight:600;font-size:0.95rem;box-shadow:0 8px 32px rgba(232,160,180,0.4);transition:all 0.4s ease;animation:float-dm 3s ease-in-out infinite;">
+    <span style="font-size:1.4rem">📩</span>
+    <span>DM to Order</span>
+  </a>
+  <style>@keyframes float-dm{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}.float-dm:hover{transform:translateY(-4px) scale(1.05);box-shadow:0 12px 40px rgba(232,160,180,0.5)}@media(max-width:576px){.float-dm span:last-child{display:none}}</style>
+
+  <script>
+    (function() {
+      const recipient = document.getElementById('recipient');
+      const occasion = document.getElementById('occasion');
+      const message = document.getElementById('message');
+      const charCount = document.getElementById('charCount');
+      const cardName = document.getElementById('cardName');
+      const cardOccasion = document.getElementById('cardOccasion');
+      const cardMessage = document.getElementById('cardMessage');
+      const occasionBadge = document.getElementById('occasionBadge');
+      const accentBar = document.getElementById('accentBar');
+      const colorName = document.getElementById('colorName');
+      const cardSize = document.getElementById('cardSize');
+      const cardWrap = document.getElementById('cardWrap');
+      const swatches = document.querySelectorAll('.swatch');
+      const sizes = document.querySelectorAll('input[name="size"]');
+      const wrappings = document.querySelectorAll('input[name="wrapping"]');
+
+      let selectedColor = '#E8A0B4';
+      let selectedColorName = 'Blush Pink';
+
+      function updateCharCount() {
+        const len = message.value.length;
+        charCount.textContent = len;
+      }
+
+      function updatePreview() {
+        cardName.textContent = recipient.value || 'Your Little One';
+        cardOccasion.textContent = (occasion.value || 'Just Because').toUpperCase();
+        cardMessage.textContent = message.value || 'A gift of love for your little one ♡';
+        occasionBadge.textContent = '💝 Perfect for: ' + (occasion.value || 'Just Because');
+        accentBar.style.background = selectedColor;
+
+        let sizeText = 'S (3-6mo)';
+        sizes.forEach(function(r) { if (r.checked) sizeText = r.value; });
+        cardSize.textContent = '👟 ' + sizeText;
+
+        let wrapText = 'Gift Box + Ribbon';
+        wrappings.forEach(function(r) { if (r.checked) wrapText = r.value; });
+        const wrapEmoji = wrapText.includes('Eco') ? '🌿' : wrapText.includes('Premium') ? '✨' : '🎀';
+        cardWrap.textContent = wrapEmoji + ' ' + wrapText;
+      }
+
+      // Swatch clicks
+      swatches.forEach(function(s) {
+        s.addEventListener('click', function() {
+          swatches.forEach(function(x) { x.classList.remove('active', 'check'); });
+          s.classList.add('active', 'check');
+          selectedColor = s.dataset.color;
+          selectedColorName = s.dataset.name;
+          colorName.textContent = 'Selected: ' + selectedColorName;
+          updatePreview();
+        });
+      });
+
+      // Input events
+      recipient.addEventListener('input', updatePreview);
+      occasion.addEventListener('change', updatePreview);
+      message.addEventListener('input', function() { updateCharCount(); updatePreview(); });
+      sizes.forEach(function(r) { r.addEventListener('change', updatePreview); });
+      wrappings.forEach(function(r) { r.addEventListener('change', updatePreview); });
+
+      updateCharCount();
+      updatePreview();
+    })();
+  </script>
+</body>
+</html>

@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1080 1080" width="1080" height="1080">
+<defs>
+  <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+    <stop offset="0%" stop-color="#FEF9F4"/>
+    <stop offset="100%" stop-color="#F5E6CC"/>
+  </linearGradient>
+  <linearGradient id="gold" x1="0" y1="0" x2="1" y2="1">
+    <stop offset="0%" stop-color="#D4A574"/>
+    <stop offset="100%" stop-color="#C4956A"/>
+  </linearGradient>
+</defs>
+<rect width="1080" height="1080" fill="url(#bg)"/>
+<rect x="40" y="40" width="1000" height="1000" rx="30" fill="none" stroke="#D4A574" stroke-width="1" opacity="0.2"/>
+<text x="540" y="160" text-anchor="middle" font-family="Arial" font-size="26" fill="#C4956A" letter-spacing="3">MOM HACK</text>
+<text x="540" y="300" text-anchor="middle" font-family="Georgia" font-size="72" font-weight="700" fill="#3D2B1F">Keep CROSHARA</text>
+<text x="540" y="390" text-anchor="middle" font-family="Georgia" font-size="72" font-weight="700" fill="#3D2B1F">in Your Diaper Bag</text>
+<text x="540" y="500" text-anchor="middle" font-family="Arial" font-size="34" fill="#8B7355">❄️ Sudden AC in malls/restaurants</text>
+<text x="540" y="560" text-anchor="middle" font-family="Arial" font-size="34" fill="#8B7355">🍼 Night feed warmth</text>
+<text x="540" y="620" text-anchor="middle" font-family="Arial" font-size="34" fill="#8B7355">🏥 Doctor visits</text>
+<text x="540" y="680" text-anchor="middle" font-family="Arial" font-size="34" fill="#8B7355">🚗 Car rides</text>
+<rect x="290" y="750" width="500" height="60" rx="30" fill="url(#gold)"/>
+<text x="540" y="788" text-anchor="middle" font-family="Arial" font-size="28" font-weight="700" fill="#0D0D0D">Lightweight. Packable. Warm.</text>
+<text x="540" y="900" text-anchor="middle" font-family="Georgia" font-size="36" font-weight="700" fill="#D4A574">Follow @crosharahandmade</text>
+<text x="540" y="960" text-anchor="middle" font-family="Arial" font-size="24" fill="#8B7355">For more mom hacks & baby tips!</text>
+</svg>

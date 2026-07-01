@@ -1,0 +1,65 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1080 1080" width="1080" height="1080">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#FDF6F0"/>
+      <stop offset="50%" stop-color="#F8EFE2"/>
+      <stop offset="100%" stop-color="#F5E6D3"/>
+    </linearGradient>
+    <linearGradient id="pinkToNavy" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#E8A0B4"/>
+      <stop offset="100%" stop-color="#1a1a2e"/>
+    </linearGradient>
+    <filter id="shadow">
+      <feDropShadow dx="0" dy="5" stdDeviation="10" flood-color="#1a1a2e" flood-opacity="0.1"/>
+    </filter>
+  </defs>
+  <rect width="1080" height="1080" fill="url(#bg)"/>
+  <circle cx="850" cy="850" r="400" fill="#E8A0B4" opacity="0.05"/>
+  <circle cx="200" cy="200" r="300" fill="#E8A0B4" opacity="0.04"/>
+  <rect x="80" y="40" width="300" height="48" rx="24" fill="#E8A0B4" opacity="0.12"/>
+  <text x="100" y="71" font-family="Georgia, serif" font-size="28" font-weight="700" fill="#1a1a2e" letter-spacing="3">CROSHARA</text>
+  <text x="380" y="71" font-family="Arial, sans-serif" font-size="14" fill="#E8A0B4" letter-spacing="1">SHIPPING</text>
+  <rect x="80" y="90" width="60" height="3" rx="1.5" fill="#E8A0B4"/>
+  <g filter="url(#shadow)">
+    <rect x="140" y="180" width="800" height="300" rx="30" fill="white" opacity="0.9"/>
+    <rect x="140" y="180" width="800" height="300" rx="30" fill="none" stroke="#E8A0B4" stroke-width="1.5" opacity="0.2"/>
+    <circle cx="380" cy="330" r="65" fill="#E8A0B4" opacity="0.08"/>
+    <rect x="340" y="300" width="80" height="60" rx="8" fill="#E8A0B4" opacity="0.15"/>
+    <rect x="350" y="310" width="60" height="40" rx="6" fill="#E8A0B4" opacity="0.25"/>
+    <circle cx="360" cy="360" r="10" fill="#1a1a2e" opacity="0.4"/>
+    <circle cx="400" cy="360" r="10" fill="#1a1a2e" opacity="0.4"/>
+    <rect x="355" y="280" width="50" height="25" rx="4" fill="#E8A0B4" opacity="0.2"/>
+    <text x="380" y="300" font-family="Arial, sans-serif" font-size="10" fill="#1a1a2e" text-anchor="middle" opacity="0.6">CROSHARA</text>
+    <path d="M370 320 L380 310 L390 320" fill="none" stroke="#E8A0B4" stroke-width="3" stroke-linecap="round"/>
+    <text x="380" y="250" font-family="Arial, sans-serif" font-size="16" font-weight="700" fill="#E8A0B4" text-anchor="middle" letter-spacing="2">DELIVERY</text>
+    <rect x="510" y="270" width="80" height="60" rx="5" fill="none" stroke="#1a1a2e" stroke-width="2.5" stroke-opacity="0.15"/>
+    <rect x="515" y="275" width="70" height="50" rx="3" fill="none" stroke="#1a1a2e" stroke-width="1.5" stroke-opacity="0.1"/>
+    <path d="M530 300 L555 280 L570 310" fill="none" stroke="#E8A0B4" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M550 305 L555 280 L570 290" fill="none" stroke="#E8A0B4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    <rect x="520" y="250" width="60" height="20" rx="10" fill="#E8A0B4" opacity="0.15"/>
+    <text x="550" y="263" font-family="Arial, sans-serif" font-size="10" font-weight="700" fill="#E8A0B4" text-anchor="middle" letter-spacing="1">GIFT</text>
+    <text x="550" y="370" font-family="Arial, sans-serif" font-size="14" fill="#1a1a2e" text-anchor="middle" opacity="0.5" letter-spacing="1">Delivered with love</text>
+  </g>
+  <text x="540" y="550" font-family="Georgia, serif" font-size="48" font-weight="700" fill="#1a1a2e" text-anchor="middle" letter-spacing="2">Free Shipping</text>
+  <text x="540" y="610" font-family="Georgia, serif" font-size="48" font-weight="700" fill="#1a1a2e" text-anchor="middle" letter-spacing="2">Across India</text>
+  <rect x="340" y="650" width="400" height="60" rx="30" fill="#1a1a2e"/>
+  <text x="540" y="688" font-family="Arial, sans-serif" font-size="22" font-weight="700" fill="white" text-anchor="middle" letter-spacing="4">FREE DELIVERY</text>
+  <rect x="140" y="740" width="800" height="90" rx="20" fill="white" opacity="0.7"/>
+  <rect x="140" y="740" width="800" height="90" rx="20" fill="none" stroke="#E8A0B4" stroke-width="1" opacity="0.3"/>
+  <circle cx="210" cy="785" r="15" fill="#E8A0B4"/>
+  <text x="210" y="790" font-family="Arial, sans-serif" font-size="16" font-weight="700" fill="white" text-anchor="middle">✓</text>
+  <text x="245" y="780" font-family="Arial, sans-serif" font-size="16" fill="#1a1a2e" font-weight="700">Pan India Shipping</text>
+  <text x="245" y="802" font-family="Arial, sans-serif" font-size="13" fill="#1a1a2e" opacity="0.5">3-7 business days</text>
+  <line x1="470" y1="755" x2="470" y2="815" stroke="#E8A0B4" stroke-width="1" opacity="0.3"/>
+  <circle cx="570" cy="785" r="15" fill="#E8A0B4"/>
+  <text x="570" y="790" font-family="Arial, sans-serif" font-size="16" font-weight="700" fill="white" text-anchor="middle">✓</text>
+  <text x="605" y="780" font-family="Arial, sans-serif" font-size="16" fill="#1a1a2e" font-weight="700">Gift Wrapping</text>
+  <text x="605" y="802" font-family="Arial, sans-serif" font-size="13" fill="#1a1a2e" opacity="0.5">Free premium packaging</text>
+  <line x1="830" y1="755" x2="830" y2="815" stroke="#E8A0B4" stroke-width="1" opacity="0.3"/>
+  <circle cx="870" cy="785" r="15" fill="#E8A0B4"/>
+  <text x="870" y="790" font-family="Arial, sans-serif" font-size="16" font-weight="700" fill="white" text-anchor="middle">✓</text>
+  <text x="905" y="780" font-family="Arial, sans-serif" font-size="16" fill="#1a1a2e" font-weight="700">Easy Returns</text>
+  <text x="905" y="802" font-family="Arial, sans-serif" font-size="13" fill="#1a1a2e" opacity="0.5">7-day exchange policy</text>
+  <rect x="80" y="1020" width="920" height="2" fill="#E8A0B4" opacity="0.3"/>
+  <text x="540" y="1045" font-family="Arial, sans-serif" font-size="11" fill="#1a1a2e" opacity="0.3" text-anchor="middle" letter-spacing="2">CROSHARA · INDIA'S FIRST BAREFOOT-FRIENDLY HANDMADE BABY SHOES</text>
+</svg>

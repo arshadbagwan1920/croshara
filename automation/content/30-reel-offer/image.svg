@@ -1,0 +1,57 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1080 1080" width="1080" height="1080">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#1a1a2e"/>
+      <stop offset="100%" stop-color="#2a2a4e"/>
+    </linearGradient>
+    <linearGradient id="accentGlow" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#E8A0B4" stop-opacity="0.15"/>
+      <stop offset="100%" stop-color="#E8A0B4" stop-opacity="0"/>
+    </linearGradient>
+    <linearGradient id="pinkBtn" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#E8A0B4"/>
+      <stop offset="100%" stop-color="#D4849A"/>
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="4" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <rect width="1080" height="1080" fill="url(#bg)"/>
+  <circle cx="540" cy="540" r="480" fill="url(#accentGlow)"/>
+  <circle cx="200" cy="200" r="180" fill="#E8A0B4" opacity="0.06"/>
+  <circle cx="880" cy="880" r="220" fill="#E8A0B4" opacity="0.05"/>
+  <circle cx="200" cy="880" r="150" fill="#E8A0B4" opacity="0.04"/>
+  <circle cx="880" cy="200" r="160" fill="#E8A0B4" opacity="0.04"/>
+  <text x="540" y="160" font-family="Georgia, serif" font-size="28" font-weight="700" fill="#E8A0B4" text-anchor="middle" letter-spacing="6">CROSHARA</text>
+  <rect x="420" y="180" width="240" height="2" fill="#E8A0B4" opacity="0.3"/>
+  <text x="540" y="280" font-family="Georgia, serif" font-size="52" font-weight="700" fill="white" text-anchor="middle" letter-spacing="2">India's First</text>
+  <text x="540" y="345" font-family="Georgia, serif" font-size="52" font-weight="700" fill="white" text-anchor="middle" letter-spacing="2">Barefoot-Friendly</text>
+  <text x="540" y="410" font-family="Georgia, serif" font-size="52" font-weight="700" fill="white" text-anchor="middle" letter-spacing="2">Handmade Baby Shoes</text>
+  <rect x="350" y="430" width="380" height="3" rx="1.5" fill="#E8A0B4" opacity="0.3"/>
+  <path d="M270 470 Q280 460 290 470 L310 460 Q320 450 330 460" fill="none" stroke="#E8A0B4" stroke-width="2" opacity="0.3" stroke-linecap="round"/>
+  <path d="M750 470 Q760 460 770 470 L790 460 Q800 450 810 460" fill="none" stroke="#E8A0B4" stroke-width="2" opacity="0.3" stroke-linecap="round"/>
+  <text x="540" y="500" font-family="Arial, sans-serif" font-size="18" fill="#E8A0B4" text-anchor="middle" letter-spacing="6" opacity="0.8">HANDMADE WITH LOVE</text>
+  <rect x="340" y="550" width="400" height="60" rx="30" fill="url(#pinkBtn)"/>
+  <text x="540" y="588" font-family="Arial, sans-serif" font-size="20" font-weight="700" fill="white" text-anchor="middle" letter-spacing="4">SHOP NOW</text>
+  <rect x="190" y="650" width="700" height="100" rx="20" fill="white" opacity="0.06"/>
+  <rect x="190" y="650" width="700" height="100" rx="20" fill="none" stroke="#E8A0B4" stroke-width="1" opacity="0.15"/>
+  <circle cx="260" cy="700" r="22" fill="#E8A0B4" opacity="0.2"/>
+  <text x="260" y="706" font-family="Arial, sans-serif" font-size="20" fill="#E8A0B4" text-anchor="middle">♡</text>
+  <text x="300" y="695" font-family="Arial, sans-serif" font-size="15" fill="white" opacity="0.7">100% Handmade</text>
+  <text x="300" y="718" font-family="Arial, sans-serif" font-size="12" fill="white" opacity="0.4">By Indian artisans</text>
+  <circle cx="500" cy="700" r="22" fill="#E8A0B4" opacity="0.2"/>
+  <text x="500" y="706" font-family="Arial, sans-serif" font-size="20" fill="#E8A0B4" text-anchor="middle">♡</text>
+  <text x="540" y="695" font-family="Arial, sans-serif" font-size="15" fill="white" opacity="0.7">Barefoot Design</text>
+  <text x="540" y="718" font-family="Arial, sans-serif" font-size="12" fill="white" opacity="0.4">Healthy foot development</text>
+  <circle cx="740" cy="700" r="22" fill="#E8A0B4" opacity="0.2"/>
+  <text x="740" y="706" font-family="Arial, sans-serif" font-size="20" fill="#E8A0B4" text-anchor="middle">♡</text>
+  <text x="780" y="695" font-family="Arial, sans-serif" font-size="15" fill="white" opacity="0.7">Pan India Shipping</text>
+  <text x="780" y="718" font-family="Arial, sans-serif" font-size="12" fill="white" opacity="0.4">Free delivery</text>
+  <rect x="80" y="800" width="920" height="1" fill="#E8A0B4" opacity="0.15"/>
+  <text x="540" y="835" font-family="Arial, sans-serif" font-size="13" fill="#E8A0B4" text-anchor="middle" letter-spacing="4" opacity="0.6">@CROSHARABABY</text>
+  <rect x="340" y="860" width="400" height="40" rx="20" fill="none" stroke="#E8A0B4" stroke-width="1" opacity="0.2"/>
+  <text x="540" y="886" font-family="Arial, sans-serif" font-size="12" fill="#E8A0B4" text-anchor="middle" letter-spacing="3" opacity="0.5">FOLLOW FOR MORE</text>
+  <rect x="80" y="1020" width="920" height="1" fill="#E8A0B4" opacity="0.2"/>
+  <text x="540" y="1045" font-family="Arial, sans-serif" font-size="11" fill="#E8A0B4" opacity="0.3" text-anchor="middle" letter-spacing="2">CROSHARA · INDIA'S FIRST BAREFOOT-FRIENDLY HANDMADE BABY SHOES</text>
+</svg>
