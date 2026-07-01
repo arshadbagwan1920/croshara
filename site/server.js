@@ -47,43 +47,7 @@ app.get("/api/health", (req, res) => {
 });
 
 app.get("/api/products", (req, res) => {
-  res.json({
-    products: [
-      {
-        id: "newborn-set",
-        name: "Newborn Wool Booties",
-        price: 599,
-        originalPrice: 799,
-        sizes: ["0-3mo", "3-6mo"],
-        colors: ["Blush Pink", "Mint Green", "Cream", "Navy Blue", "Grey", "Walnut Brown"],
-        description: "Ultra-soft pure wool booties for delicate newborn feet. Barefoot-friendly flexible sole.",
-        features: ["100% Natural Wool", "Barefoot-Friendly Sole", "Handmade by Artisans", "Zero Chemicals"],
-        inStock: true,
-      },
-      {
-        id: "infant-set",
-        name: "Infant Wool Booties",
-        price: 799,
-        originalPrice: 999,
-        sizes: ["6-9mo", "9-12mo"],
-        colors: ["Blush Pink", "Mint Green", "Cream", "Navy Blue", "Grey", "Walnut Brown"],
-        description: "Perfect for crawlers and early walkers. Stretchy wool fit that stays on active feet.",
-        features: ["Stretchy Ribbed Ankle", "Non-Slip Grip", "Breathable Wool", "Machine Washable"],
-        inStock: true,
-      },
-      {
-        id: "toddler-set",
-        name: "Toddler Wool Booties",
-        price: 1299,
-        originalPrice: 1599,
-        sizes: ["12-18mo", "18-24mo"],
-        colors: ["Blush Pink", "Mint Green", "Cream", "Navy Blue", "Grey", "Walnut Brown"],
-        description: "Built for active toddlers. Durable wool construction with reinforced stitching.",
-        features: ["Reinforced Stitching", "Extra Durable Sole", "Thermal Wool Lining", "Easy On/Off"],
-        inStock: true,
-      },
-    ],
-  });
+  res.json({ products: readJSON("products.json") });
 });
 
 app.post("/api/contact", (req, res) => {
