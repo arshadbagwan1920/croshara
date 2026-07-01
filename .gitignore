@@ -5,4 +5,7 @@ __pycache__/
 automation/session.json
 automation/config.json
 automation/playwright_auth.json
-site/data/*.json
+site/data/contacts.json
+site/data/orders.json
+site/data/newsletter.json
+site/data/referrals.json

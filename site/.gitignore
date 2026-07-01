@@ -1,3 +1,6 @@
 node_modules/
 .env
-data/*.json
+data/contacts.json
+data/orders.json
+data/newsletter.json
+data/referrals.json
